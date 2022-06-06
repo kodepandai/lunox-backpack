@@ -1,16 +1,19 @@
-# LUNOX
+# LUNOX BACKPACK
 
-## What is this
-Lunox is Laravel-Flavoured NodeJs Framework. What is Laravel?
-Laravel is a web application framework with expressive, elegant syntax [see the official website](https://laravel.com). Lunox goals is to bring the Laravel Flavour to nodejs environment.
+## Latar Belakang
+Repo ini bertujuan untuk bereksperimen membuat semacam [Laravel-Backpack](https://github.com/Laravel-Backpack/CRUD) tapi dengan menggunakan framework [lunox](https://github.com/kodepandai/lunox). Pasti ada beberapa fitur yang cara penggunaanya berbeda dengan di Laravel karena cara kerja nodejs dan php yang berbeda. 
 
-## Documentation
+Selain itu repo ini juga digunakan untuk mencari tahu fitur2 apa saja yang perlu ditambahkan atau issue2 yang harus dibenahi di dalam lunox framework agar dapat mensuport pembuatan lunox-backpack ini. Maka dari itu jangan heran kalau versi lunox framework yang digunakan berbeda dengan yang digunakan di [skeleton lunox](https://github.com/kodepandai/lunox). 
 
-Lunox Documentation are moved [here](https://kodepandai.github.io/lunox/)
-## Contribution
-Lunox has three main repo
-1. [Lunox](https://github.com/kodepandai/lunox) - Lunox app boilerplate
-2. [Lunox Framework](https://github.com/kodepandai/lunox-framework) - main source code of Lunox Framework
-3. [Lunox Website](https://github.com/kodepandai/lunox-website) - Documentation of Lunox Framework
+## Fitur yang akan dikembangkan
+- Basic Auth
+- Basic Permission
+- CrudController
+- crud fields
+- crud columns
+- BackpackServiceProvider
+- CrudPanel
+- Dashboard admin panel
 
-This framework still in development, PR are welcome, but please open issue or discussion before adding new feature. 
+## Kontribusi
+gabung di channel discord [KodePandai](https://discord.gg/yWwfvrYtC3) untuk diskusi lebih lanjut, karena project ini masih dalam tahap riset
