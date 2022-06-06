@@ -1,4 +1,5 @@
 import AuthController from "app/Http/Controllers/AuthController";
+import UserCrudController from "app/Http/Controllers/UserCrudController";
 import WelcomeController from "app/Http/Controllers/WelcomeController";
 import { Route } from "lunox";
 
@@ -9,4 +10,6 @@ Route.get("/logout", [AuthController, "logout"]);
 
 Route.middleware("auth").group(() => {
   Route.get("/admin", () => view("admin", { version: app("version") }));
+
+  Route.crud("user", UserCrudController);
 });

@@ -1,4 +1,5 @@
 import AppServiceProvider from "app/Providers/AppServiceProvider";
+import BackpackServiceProvider from "app/Providers/BackpackServiceProvider";
 import ExceptionServiceProvider from "app/Providers/ExceptionServiceProvider";
 import RouteServiceProvider from "app/Providers/RouteServiceProvider";
 import {
@@ -26,6 +27,8 @@ const app: AppConfig = {
     AuthServiceProvider,
     ValidationServiceProvider,
     ViewServiceProvider,
+
+    BackpackServiceProvider,
 
     // app service providers
     AppServiceProvider,
