@@ -26,7 +26,7 @@ class AuthController extends Controller {
   }
 
   async logout(req: Request) {
-    req.auth().logout();
+    await req.auth().logout();
     return redirect("/");
   }
 }
