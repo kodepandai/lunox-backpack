@@ -15,11 +15,13 @@ class BackpackServiceProvider extends ServiceProvider {
   private addRouteMacro() {
     Route.macro(
       "crud",
-      function (this: Router, name: string, controller: typeof CrudController) {
-        const { setupListRoutes } = new controller();
-        if (setupListRoutes instanceof Function) {
-          setupListRoutes(name, controller);
-        }
+      function (
+        this: Router,
+        segment: string,
+        controller: typeof CrudController
+      ) {
+        const crudInstance = new controller();
+        crudInstance.setupRoutes(segment, controller);
       }
     );
   }
