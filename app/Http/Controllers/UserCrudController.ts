@@ -5,9 +5,22 @@ import ListOperation from "./Operations/ListOperation";
 
 class UserCrudController extends Traitable(CrudController).use(ListOperation) {
   public setup(): void {
-    // super.setup();
     this.crud.setEntityNameStrings("User", "Users");
     this.crud.setModel(User);
+  }
+
+  public setupListOperation() {
+    this.crud.addColumn({
+      name: "email",
+    });
+    this.crud.addColumn({
+      name: "username",
+      label: "User Name",
+    });
+    this.crud.addColumn({
+      name: "created_at",
+      label: "Since",
+    });
   }
 }
 
