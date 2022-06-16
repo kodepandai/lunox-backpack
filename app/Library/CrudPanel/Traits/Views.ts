@@ -1,12 +1,12 @@
 import type { Class, Trait } from "lunox";
-import type { Settings } from "app/Library/CrudPanel/Traits/Settings";
+import type { ISettings } from "app/Library/CrudPanel/Traits/Settings";
 import type { BaseCrudPanel } from "../CrudPanel";
 
-export interface Views {
+export interface IViews {
   setListView(view: string): void;
   getListView(): string;
 }
-const Views: Trait<typeof BaseCrudPanel & Class<Settings>> = (s) =>
+const Views: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
   class extends s {
     public setListView(view: string) {
       this.set("list.view", view);
