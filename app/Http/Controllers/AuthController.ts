@@ -18,7 +18,9 @@ class AuthController extends Controller {
       username: "required",
       password: "required",
     });
-    const authenticated = await req.auth().attempt({ password, username });
+    const authenticated = await req
+      .auth()
+      .attempt({ password, username }, Boolean(req.input("remember")));
     if (!authenticated) {
       abort(401, "Credentials not found!");
     }
