@@ -1,9 +1,10 @@
 import AuthController from "app/Http/Controllers/AuthController";
 import UserCrudController from "app/Http/Controllers/UserCrudController";
-import WelcomeController from "app/Http/Controllers/WelcomeController";
 import { Route } from "lunox";
 
-Route.get("/", [WelcomeController, "home"]);
+Route.get("/", () => {
+  return redirect("/admin");
+});
 Route.get("/login", [AuthController, "showLogin"]);
 Route.post("/login", [AuthController, "postLogin"]);
 Route.get("/logout", [AuthController, "logout"]);
