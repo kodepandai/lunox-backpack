@@ -18,8 +18,14 @@ class UserCrudController extends Traitable(CrudController).use(ListOperation) {
       label: "User Name",
     });
     this.crud.addColumn({
+      name: "fullname",
+      label: "Full Name",
+    });
+    this.crud.addColumn({
       name: "created_at",
-      label: "Since",
+      label: "Joined at",
+      type: "date",
+      format: "DD MMM YYYY",
     });
   }
 }

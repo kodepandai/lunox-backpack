@@ -10,8 +10,8 @@ import Views, { IViews } from "./Traits/Views";
 export class BaseCrudPanel {
   protected model!: typeof Model & CrudTrait; // entity's model
   protected route!: string; // route for entity, used for links
-  protected entity_name = "entry";
-  protected entity_name_plural = "entries";
+  public entity_name = "entry";
+  public entity_name_plural = "entries";
 
   protected entry!: any;
   protected request!: Request;

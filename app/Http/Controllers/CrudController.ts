@@ -8,6 +8,7 @@ interface CrudController extends ListOperation {}
 
 export interface CrudContext {
   crud: CrudPanel;
+  title: string;
 }
 
 class CrudController extends Controller {

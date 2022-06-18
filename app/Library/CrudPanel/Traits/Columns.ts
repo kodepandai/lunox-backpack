@@ -7,6 +7,7 @@ export interface Column {
   name: string;
   label?: string;
   type?: string;
+  [key: string]: any;
 }
 export interface IColumns {
   /**

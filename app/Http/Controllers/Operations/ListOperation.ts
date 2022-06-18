@@ -4,7 +4,7 @@ import type CrudController from "app/Http/Controllers/CrudController";
 export interface ListOperation {
   index(): void;
   search(): void;
-  showDetail(): void;
+  showDetailsRow(): void;
 }
 const ListOperation: Trait<typeof CrudController> = (s) =>
   class extends s {
@@ -18,9 +18,10 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
       Route.post(segment + "/search", [controller, "search"]).middleware(
         this.setOperationMiddleware("list")
       );
-      Route.get(segment + "/:id", [controller, "showDetail"]).middleware(
-        this.setOperationMiddleware("list")
-      );
+      Route.get(segment + "/:id/details", [
+        controller,
+        "showDetailsRow",
+      ]).middleware(this.setOperationMiddleware("list"));
     }
 
     /**
@@ -35,6 +36,7 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
 
     public index() {
       this.data.crud = this.crud;
+      this.data.title = this.crud.entity_name_plural;
 
       // this.data should be sent via view context
       // so can be accessed via onServer method on view
@@ -45,8 +47,8 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
       return "search operation";
     }
 
-    public showDetail() {
-      return "show detail operation";
+    public showDetailsRow() {
+      return "show details row operation";
     }
   };
 

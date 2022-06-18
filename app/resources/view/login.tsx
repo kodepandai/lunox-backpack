@@ -1,8 +1,16 @@
-import { Button, Center, Checkbox, Container, Paper, TextInput } from "@mantine/core";
+import {
+  Button,
+  Center,
+  Checkbox,
+  Container,
+  Paper,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import { csrf_token, old, session } from "lunox/client";
 import { useEffect } from "react";
 
-const Login = ({ version = {} }) => {
+const Login = ({ version = {} }: { version: any }) => {
   useEffect(() => {
     // show message from flashed session
     if (session("message")) {
@@ -10,7 +18,10 @@ const Login = ({ version = {} }) => {
     }
   });
   return (
-    <Container className="h-screen justify-center flex bg-gray-100 px-10" fluid>
+    <Container
+      className="h-screen justify-center flex bg-gray-100 px-10 flex-col items-center"
+      fluid
+    >
       <Center>
         <Paper shadow="md" radius={10} p="xl">
           <form
@@ -19,26 +30,29 @@ const Login = ({ version = {} }) => {
             className="flex flex-col max-w-xs w-200 mx-auto"
           >
             <input type="hidden" name="_token" value={csrf_token()} />
-            <TextInput 
-              type="text" 
+            <TextInput
+              type="text"
               name="username"
-              label="username" 
+              label="username"
               placeholder="username or email"
               defaultValue={old("username")}
             />
-            <TextInput 
-              type="password" 
+            <TextInput
+              type="password"
               name="password"
-              label="password" 
+              label="password"
               placeholder="your password"
               defaultValue={old("password")}
             />
-            <Checkbox label="remember me" name="remember" color="orange" my="md"/>
+            <Checkbox label="remember me" name="remember" my="md" />
 
             <Button type="submit">Login</Button>
           </form>
         </Paper>
       </Center>
+      <Text color="dimmed" size="xs" mt={10}>
+        lunox backpack v{version.app} - lunox v{version.framework}
+      </Text>
     </Container>
   );
 };
