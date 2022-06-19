@@ -1,31 +1,34 @@
 import { Paper } from "@mantine/core";
-import type { CrudContext } from "app/Http/Controllers/CrudController";
 import type User from "app/Model/User";
-import type { ObjectOf, OnServer } from "lunox";
+import type { OnServer } from "lunox";
 import CrudLayout from "./crud/base/layout";
 
-export const onServer: OnServer = async (req, ctx: CrudContext) => {
+export const onServer: OnServer = async (req) => {
   return {
     user: await req.auth().user(),
-    layoutData: {
-      appName: config("app.name"),
-      title: ctx.title,
-      version: app("version"),
-      user: await req.auth().user(),
-    },
+    appName: config("app.name"),
+    version: app("version"),
   };
 };
 
 const Admin = ({
+  version,
   user,
-  layoutData = {},
+  appName,
 }: {
-  version: ObjectOf<string>;
+  version: any;
   user: User;
-  layoutData: ObjectOf<any>;
+  appName: string;
 }) => {
   return (
-    <CrudLayout data={layoutData}>
+    <CrudLayout
+      data={{
+        title: "Dashboard",
+        user,
+        appName,
+        version,
+      }}
+    >
       <Paper shadow="md" p={10}>
         Welcome {user?.fullname}
       </Paper>

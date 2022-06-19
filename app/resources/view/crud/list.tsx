@@ -1,9 +1,10 @@
 import type { CrudContext } from "app/Http/Controllers/CrudController";
 import type { Column } from "app/Library/CrudPanel/Traits/Columns";
-import type { Model, ObjectOf, OnServer } from "lunox";
+import type { Model, OnServer } from "lunox";
 import * as components from "./columns/index";
 import { Paper, ScrollArea, Table, Title } from "@mantine/core";
 import CrudLayout from "./base/layout";
+import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
 
 export const onServer: OnServer = async (req, ctx: CrudContext) => {
   const model = ctx.crud.getModel();
@@ -12,25 +13,20 @@ export const onServer: OnServer = async (req, ctx: CrudContext) => {
   return {
     entries: await model.query(),
     columns,
-    layoutData: {
-      appName: config("app.name"),
-      title: ctx.title,
-      version: app("version"),
-      user: await req.auth().user(),
-    },
+    layoutData: await ctx.crud.getLayoutData(),
   };
 };
 
 export default ({
   entries,
   columns,
-  layoutData = {},
+  layoutData,
 }: {
   entries: Model[];
   version: any;
   columns: Column[];
   components: any;
-  layoutData: ObjectOf<any>;
+  layoutData: LayoutData;
 }) => {
   return (
     <CrudLayout data={layoutData}>
