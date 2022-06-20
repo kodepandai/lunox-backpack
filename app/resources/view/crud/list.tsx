@@ -33,7 +33,13 @@ export default ({
       <Title order={1} className="mb-3">
         {layoutData.title}
       </Title>
-      <Button className="mb-3" component="a" href={layoutData.route+"/create"}>Add {layoutData.entity?.name.singular}</Button>
+      <Button
+        className="mb-3"
+        component="a"
+        href={layoutData.route + "/create"}
+      >
+        Add {layoutData.entity?.name.singular}
+      </Button>
       <Paper shadow="xs" p="xs">
         <ScrollArea>
           <Table striped highlightOnHover>

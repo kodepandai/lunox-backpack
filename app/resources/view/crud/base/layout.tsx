@@ -33,7 +33,7 @@ const CrudLayout: FC<PropsWithChildren<{ data: LayoutData }>> = ({
     window.localStorage.setItem("mantine:colorScheme", newColorScheme);
   };
 
-  if(!import.meta.env.SSR){
+  if (!import.meta.env.SSR) {
     useLayoutEffect(() => {
       // get last colorScheme from localStroage
       const savedColorScheme: ColorScheme =

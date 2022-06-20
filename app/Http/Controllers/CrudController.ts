@@ -1,6 +1,5 @@
 import CrudPanel from "app/Library/CrudPanel/CrudPanel";
 import { Controller, ObjectOf, Str } from "lunox";
-import type { Middleware } from "lunox/dist/Contracts/Http/Middleware";
 import type { CreateOperation } from "./Operations/CreateOperation";
 import type { ListOperation } from "./Operations/ListOperation";
 

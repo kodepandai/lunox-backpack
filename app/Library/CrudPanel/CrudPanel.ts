@@ -16,7 +16,7 @@ export interface LayoutData {
     name: {
       singular: string;
       plural: string;
-    }
+    };
   };
   version: {
     framework: string;
@@ -59,18 +59,22 @@ export class BaseCrudPanel {
   }
 
   /**
-  * Set the route for this CRUD.
-  * Ex: admin/article.
-  */
-  public setRoute(route: string){
+   * Set the route for this CRUD.
+   * Ex: admin/article.
+   */
+  public setRoute(route: string) {
     this.route = route;
   }
 
   /**
    * Get current route for this CRUD
    */
-  public getRoute(){
-    return this.route || this.request.getRouter().prefix+this.request.getRouter().segment || "";
+  public getRoute() {
+    return (
+      this.route ||
+      this.request.getRouter().prefix + this.request.getRouter().segment ||
+      ""
+    );
   }
 
   /**
@@ -84,8 +88,8 @@ export class BaseCrudPanel {
       entity: {
         name: {
           singular: this.entity_name,
-          plural: this.entity_name_plural
-        }
+          plural: this.entity_name_plural,
+        },
       }, //TODO: update me
       version: app<any>("version"),
       user: await this.request.auth().user(),

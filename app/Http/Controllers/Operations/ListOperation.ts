@@ -12,22 +12,17 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
       segment: string,
       controller: typeof CrudController
     ) {
-
       Route.get(segment, [controller, "index"], {
         operation: "list",
-        segment
+        segment,
       });
       Route.post(segment + "/search", [controller, "search"], {
         operation: "list",
-        segment
-
+        segment,
       });
-      Route.get(segment + "/:id/details", [
-        controller,
-        "showDetailsRow",
-      ], {
+      Route.get(segment + "/:id/details", [controller, "showDetailsRow"], {
         operation: "list",
-        segment
+        segment,
       });
     }
 

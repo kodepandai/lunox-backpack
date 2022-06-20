@@ -5,6 +5,9 @@ import type { BaseCrudPanel } from "../CrudPanel";
 export interface IViews {
   setListView(view: string): void;
   getListView(): string;
+
+  setCreateView(view: string): void;
+  getCreateView(): string;
 }
 const Views: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
   class extends s {
@@ -14,6 +17,14 @@ const Views: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
 
     public getListView() {
       return this.get("list.view") || "crud.list";
+    }
+
+    public setCreateView(view: string) {
+      this.set("create.view", view);
+    }
+
+    public getCreateView() {
+      return this.get("create.view") || "crud.create";
     }
   };
 

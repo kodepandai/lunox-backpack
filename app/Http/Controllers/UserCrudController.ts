@@ -1,9 +1,13 @@
 import User from "app/Model/User";
 import { Traitable } from "lunox";
 import CrudController from "./CrudController";
+import CreateOperation from "./Operations/CreateOperation";
 import ListOperation from "./Operations/ListOperation";
 
-class UserCrudController extends Traitable(CrudController).use(ListOperation) {
+class UserCrudController extends Traitable(CrudController).use(
+  ListOperation,
+  CreateOperation
+) {
   public setup(): void {
     this.crud.setEntityNameStrings("User", "Users");
     this.crud.setModel(User);
@@ -27,6 +31,10 @@ class UserCrudController extends Traitable(CrudController).use(ListOperation) {
       type: "date",
       format: "DD MMM YYYY",
     });
+  }
+
+  public setupCreateOperation() {
+    console.info("setup create run");
   }
 }
 
