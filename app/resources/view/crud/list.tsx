@@ -2,7 +2,15 @@ import type { CrudContext } from "app/Http/Controllers/CrudController";
 import type { Column } from "app/Library/CrudPanel/Traits/Columns";
 import type { Model, OnServer } from "lunox";
 import * as components from "./columns/index";
-import { Button, Paper, ScrollArea, Table, Title } from "@mantine/core";
+import {
+  Anchor,
+  Breadcrumbs,
+  Button,
+  Paper,
+  ScrollArea,
+  Table,
+  Title,
+} from "@mantine/core";
 import CrudLayout from "./base/layout";
 import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
 
@@ -23,13 +31,14 @@ export default ({
   layoutData,
 }: {
   entries: Model[];
-  version: any;
   columns: Column[];
-  components: any;
   layoutData: LayoutData;
 }) => {
   return (
     <CrudLayout data={layoutData}>
+      <Breadcrumbs className="mb-4">
+        <Anchor href="/admin">Dashboard</Anchor>
+      </Breadcrumbs>
       <Title order={1} className="mb-3">
         {layoutData.title}
       </Title>

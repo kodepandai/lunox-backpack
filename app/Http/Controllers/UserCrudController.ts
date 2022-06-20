@@ -34,7 +34,41 @@ class UserCrudController extends Traitable(CrudController).use(
   }
 
   public setupCreateOperation() {
-    console.info("setup create run");
+    this.crud.addField({
+      name: "email",
+      grid: 6,
+    });
+
+    this.crud.addField({
+      name: "username",
+      label: "User Name",
+      grid: 6,
+    });
+
+    this.crud.addField({
+      name: "fullname",
+      label: "Full Name",
+      grid: 6,
+    });
+
+    this.crud.addField({
+      name: "phone",
+      label: "Phone Number",
+      grid: 6,
+    });
+
+    this.crud.addField({
+      name: "password",
+      type: "password",
+      grid: 6,
+    });
+
+    this.crud.addField({
+      name: "password_confirm",
+      label: "Confirm Password",
+      type: "password",
+      grid: 6,
+    });
   }
 }
 

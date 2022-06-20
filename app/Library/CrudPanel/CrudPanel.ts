@@ -7,6 +7,7 @@ import Settings, { ISettings } from "./Traits/Settings";
 import Columns, { IColumns } from "./Traits/Columns";
 import Views, { IViews } from "./Traits/Views";
 import type { Authenticatable } from "lunox/dist/Contracts/Auth/Authenticatable";
+import Fields, { IFields } from "./Traits/Fields";
 
 export interface LayoutData {
   appName: string;
@@ -96,9 +97,10 @@ export class BaseCrudPanel {
     };
   }
 }
-interface CrudPanel extends ISettings, IViews, IOperations, IColumns {}
+interface CrudPanel extends ISettings, IViews, IOperations, IColumns, IFields {}
 class CrudPanel extends Traitable(BaseCrudPanel).use(
   Columns,
+  Fields,
   Views,
   Settings,
   Operations
