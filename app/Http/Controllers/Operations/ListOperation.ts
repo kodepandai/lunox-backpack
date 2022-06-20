@@ -12,16 +12,23 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
       segment: string,
       controller: typeof CrudController
     ) {
-      Route.get(segment, [controller, "index"]).middleware(
-        this.setOperationMiddleware("list")
-      );
-      Route.post(segment + "/search", [controller, "search"]).middleware(
-        this.setOperationMiddleware("list")
-      );
+
+      Route.get(segment, [controller, "index"], {
+        operation: "list",
+        segment
+      });
+      Route.post(segment + "/search", [controller, "search"], {
+        operation: "list",
+        segment
+
+      });
       Route.get(segment + "/:id/details", [
         controller,
         "showDetailsRow",
-      ]).middleware(this.setOperationMiddleware("list"));
+      ], {
+        operation: "list",
+        segment
+      });
     }
 
     /**
@@ -36,8 +43,6 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
 
     public index() {
       this.data.crud = this.crud;
-      this.data.title = this.crud.entity_name_plural;
-
       // this.data should be sent via view context
       // so can be accessed via onServer method on view
       return view(this.crud.getListView()).withContext(this.data);

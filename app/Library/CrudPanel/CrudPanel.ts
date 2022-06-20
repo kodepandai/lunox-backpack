@@ -11,6 +11,13 @@ import type { Authenticatable } from "lunox/dist/Contracts/Auth/Authenticatable"
 export interface LayoutData {
   appName: string;
   title: string;
+  route?: string;
+  entity?: {
+    name: {
+      singular: string;
+      plural: string;
+    }
+  };
   version: {
     framework: string;
     app: string;
@@ -52,12 +59,34 @@ export class BaseCrudPanel {
   }
 
   /**
+  * Set the route for this CRUD.
+  * Ex: admin/article.
+  */
+  public setRoute(route: string){
+    this.route = route;
+  }
+
+  /**
+   * Get current route for this CRUD
+   */
+  public getRoute(){
+    return this.route || this.request.getRouter().prefix+this.request.getRouter().segment || "";
+  }
+
+  /**
    * get data to be injected on crud layout view
    */
   public async getLayoutData(): Promise<LayoutData> {
     return {
       appName: config("app.name"),
-      title: this.entity_name_plural, //TODO: update me
+      title: this.entity_name_plural,
+      route: this.getRoute(),
+      entity: {
+        name: {
+          singular: this.entity_name,
+          plural: this.entity_name_plural
+        }
+      }, //TODO: update me
       version: app<any>("version"),
       user: await this.request.auth().user(),
     };

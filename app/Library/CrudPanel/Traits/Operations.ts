@@ -41,7 +41,7 @@ const Operations: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
      * Get the current CRUD operation being performed.
      */
     public getCurrentOperation() {
-      return this.currentOperation || this.request.operation || "";
+      return this.currentOperation || this.request.getRouter().operation || "";
     }
 
     public applyConfigurationFromSettings(operations: string | string[]) {

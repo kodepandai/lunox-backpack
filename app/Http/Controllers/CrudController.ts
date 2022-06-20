@@ -1,10 +1,11 @@
 import CrudPanel from "app/Library/CrudPanel/CrudPanel";
 import { Controller, ObjectOf, Str } from "lunox";
 import type { Middleware } from "lunox/dist/Contracts/Http/Middleware";
+import type { CreateOperation } from "./Operations/CreateOperation";
 import type { ListOperation } from "./Operations/ListOperation";
 
 // CrudController may have this methods from Crud Traits
-interface CrudController extends ListOperation {}
+interface CrudController extends ListOperation, CreateOperation {}
 
 export interface CrudContext {
   crud: CrudPanel;
@@ -82,20 +83,6 @@ class CrudController extends Controller {
     if (get_class_methods(this).includes(setupClassName)) {
       (this as any)[setupClassName]();
     }
-  }
-
-  /**
-   * set operation name via middleware
-   */
-  protected setOperationMiddleware(operationName: string): Middleware {
-    return {
-      handle: async (req, next) => {
-        // bind operation name to request instance
-        // this will resolved on crud.getCurrentOperation()
-        req.operation = operationName;
-        return next(req);
-      },
-    };
   }
 }
 
