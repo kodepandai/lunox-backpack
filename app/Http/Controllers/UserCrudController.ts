@@ -1,5 +1,6 @@
 import User from "app/Model/User";
 import { Traitable } from "lunox";
+import UserRequest from "../Request/UserRequest";
 import CrudController from "./CrudController";
 import CreateOperation from "./Operations/CreateOperation";
 import ListOperation from "./Operations/ListOperation";
@@ -34,6 +35,7 @@ class UserCrudController extends Traitable(CrudController).use(
   }
 
   public setupCreateOperation() {
+    this.crud.setValidation(UserRequest);
     this.crud.addField({
       name: "email",
       grid: 6,
