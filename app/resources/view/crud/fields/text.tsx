@@ -1,7 +1,7 @@
 import { TextInput } from "@mantine/core";
 import type { FC, PropsWithChildren } from "react";
 
-const Text: FC<PropsWithChildren<any>> = ({ name, label, placeholder }) => {
+const Text: FC<PropsWithChildren<any>> = ({ name, label, placeholder, ...attributes }) => {
   return (
     <TextInput
       name={name}
@@ -9,6 +9,7 @@ const Text: FC<PropsWithChildren<any>> = ({ name, label, placeholder }) => {
       label={label}
       type="text"
       placeholder={placeholder}
+      {...attributes}
     />
   );
 };

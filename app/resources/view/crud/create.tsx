@@ -5,6 +5,7 @@ import {
   Breadcrumbs,
   Button,
   Grid,
+  Menu,
   Paper,
   Title,
 } from "@mantine/core";
@@ -12,8 +13,9 @@ import CrudLayout from "./base/layout";
 import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
 import type { Field } from "app/Library/CrudPanel/Traits/Fields";
 import * as components from "./fields/index";
-import { Fragment } from "react";
+import { createRef, Fragment, useState } from "react";
 import { csrf_token } from "lunox/client";
+import type { ButtonAction } from "app/Library/CrudPanel/Traits/SaveActions";
 
 export const onServer: OnServer = async (req, ctx: CrudContext) => {
   const model = ctx.crud.getModel();
@@ -23,17 +25,26 @@ export const onServer: OnServer = async (req, ctx: CrudContext) => {
     fields,
     entries: await model.query(),
     layoutData: await ctx.crud.getLayoutData(),
+    saveActions: ctx.crud.getSaveAction()
   };
 };
 
 export default ({
   layoutData,
   fields,
+  saveActions,
 }: {
   entries: Model[];
   fields: Field[];
   layoutData: LayoutData;
+  saveActions: {options: ButtonAction[]}
 }) => {
+  const [buttonAction, setButtonAction] = useState<ButtonAction>(saveActions.options[0]);
+  const formRef = createRef<HTMLFormElement>();
+  const doSubmit = (e: any)=>{
+    e.preventDefault();
+    formRef.current?.submit();
+  };
   return (
     <CrudLayout data={layoutData}>
       <Breadcrumbs className="mb-4">
@@ -46,8 +57,9 @@ export default ({
         Create {layoutData.entity?.name.singular}
       </Title>
       <Paper shadow="xs" p="xs">
-        <form action={layoutData.route} method="POST">
+        <form action={layoutData.route} method="POST" onSubmit={doSubmit} ref={formRef}>
           <input type="hidden" name="_token" value={csrf_token()} />
+          <input type="hidden" name="_save_action" value={buttonAction?.name} />
           <Grid>
             {fields.map((field) => {
               const FieldComponent = (components as any)[field.type as string]
@@ -65,8 +77,13 @@ export default ({
             })}
           </Grid>
           <Button className="mt-4" type="submit">
-            Save
+            {buttonAction?.text}
           </Button>
+          <Menu>
+            {saveActions.options.map(op=>(
+              <Menu.Item onClick={()=>setButtonAction(op)}>{op.text}</Menu.Item>
+            ))}
+          </Menu>
         </form>
       </Paper>
     </CrudLayout>
