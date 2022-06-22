@@ -1,5 +1,5 @@
 import CrudPanel from "app/Library/CrudPanel/CrudPanel";
-import { Controller, ObjectOf, Str } from "lunox";
+import { Controller, Str } from "lunox";
 import type { CreateOperation } from "./Operations/CreateOperation";
 import type { ListOperation } from "./Operations/ListOperation";
 
@@ -8,12 +8,11 @@ interface CrudController extends ListOperation, CreateOperation {}
 
 export interface CrudContext {
   crud: CrudPanel;
-  title: string;
 }
 
 class CrudController extends Controller {
   public crud!: CrudPanel;
-  public data: ObjectOf<any> = {};
+  public data: Partial<CrudContext> = {};
 
   constructor() {
     super();

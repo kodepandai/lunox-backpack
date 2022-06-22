@@ -27,22 +27,30 @@ const CreateOperation: Trait<typeof CrudController> = (s) =>
      * Add the default settings, buttons, etc that this operation needs.
      */
     protected setupCreateDefaults() {
+
+      this.crud.allowAccess("create");
+
       this.crud.configureOperation("create", () => {
         this.crud.loadDefaultOperationSettingsFromConfig();
+        this.crud.setupDefaultSaveActions();
       });
       //  TODO: complete me
     }
 
     public create() {
       this.data.crud = this.crud;
-
+      
       // this.data should be sent via view context
       // so can be accessed via onServer method on view
       return view(this.crud.getCreateView()).withContext(this.data);
     }
 
-    public store(req: Request) {
-      return req.all();
+    public async store() {
+      // validate the Form Request validation
+      await this.crud.validateRequest();
+      
+      // insert items to db
+      await this.crud.create(this.crud.getStrippedSaveRequest());
     }
   };
 
