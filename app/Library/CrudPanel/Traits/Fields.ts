@@ -1,7 +1,8 @@
-import { Class, Str, Trait } from "lunox";
+import { Class, ObjectOf, Str, Trait } from "lunox";
 import type CrudPanel from "../CrudPanel";
 import type { BaseCrudPanel } from "../CrudPanel";
 import type { ISettings } from "./Settings";
+import type { IValidation } from "./Validation";
 
 export interface Field {
   name: string;
@@ -10,6 +11,7 @@ export interface Field {
   placeholder?: string;
   grid?: number;
   break?: boolean;
+  required?: boolean;
   [key: string]: any;
 }
 export interface IFields {
@@ -21,8 +23,18 @@ export interface IFields {
    * Add field to current operation setting;
    */
   addField(field: Field): CrudPanel;
+
+  /**
+   * Get all field names for the current operation.
+   */
+  getAllFieldNames(): string[];
+
+  /**
+   * Return only registered field names.
+   */
+  getStrippedSaveRequest(): ObjectOf<any>
 }
-const Fields: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
+const Fields: Trait<typeof BaseCrudPanel & Class<ISettings> & Class<IValidation>> = (s) =>
   class extends s {
     public addField(field: Field) {
       return this.addFieldToOperationSettings(field);
@@ -49,7 +61,19 @@ const Fields: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
       if (!field.placeholder) {
         field.placeholder = field.label;
       }
+
+      if(typeof field.required == "undefined"){
+        field.required = this.isRequired(field.name);
+      }
       return field;
+    }
+
+    public getAllFieldNames(){
+      return this.fields().map(f=>f.name);
+    }
+
+    public getStrippedSaveRequest(){
+      return this.getRequest().only(this.getAllFieldNames());
     }
   };
 
