@@ -25,7 +25,7 @@ export const onServer: OnServer = async (req, ctx: CrudContext) => {
     fields,
     entries: await model.query(),
     layoutData: await ctx.crud.getLayoutData(),
-    saveActions: ctx.crud.getSaveAction()
+    saveActions: ctx.crud.getSaveAction(),
   };
 };
 
@@ -37,11 +37,13 @@ export default ({
   entries: Model[];
   fields: Field[];
   layoutData: LayoutData;
-  saveActions: {options: ButtonAction[]}
+  saveActions: { options: ButtonAction[] };
 }) => {
-  const [buttonAction, setButtonAction] = useState<ButtonAction>(saveActions.options[0]);
+  const [buttonAction, setButtonAction] = useState<ButtonAction>(
+    saveActions.options[0]
+  );
   const formRef = createRef<HTMLFormElement>();
-  const doSubmit = (e: any)=>{
+  const doSubmit = (e: any) => {
     e.preventDefault();
     formRef.current?.submit();
   };
@@ -57,7 +59,12 @@ export default ({
         Create {layoutData.entity?.name.singular}
       </Title>
       <Paper shadow="xs" p="xs">
-        <form action={layoutData.route} method="POST" onSubmit={doSubmit} ref={formRef}>
+        <form
+          action={layoutData.route}
+          method="POST"
+          onSubmit={doSubmit}
+          ref={formRef}
+        >
           <input type="hidden" name="_token" value={csrf_token()} />
           <input type="hidden" name="_save_action" value={buttonAction?.name} />
           <Grid>
@@ -80,8 +87,10 @@ export default ({
             {buttonAction?.text}
           </Button>
           <Menu>
-            {saveActions.options.map(op=>(
-              <Menu.Item onClick={()=>setButtonAction(op)}>{op.text}</Menu.Item>
+            {saveActions.options.map((op) => (
+              <Menu.Item onClick={() => setButtonAction(op)}>
+                {op.text}
+              </Menu.Item>
             ))}
           </Menu>
         </form>

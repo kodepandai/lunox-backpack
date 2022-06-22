@@ -30,9 +30,8 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
      * Add the default settings, buttons, etc that this operation needs.
      */
     protected setupListDefaults() {
-
       this.crud.allowAccess("list");
-      
+
       this.crud.configureOperation("list", () => {
         this.crud.loadDefaultOperationSettingsFromConfig();
       });

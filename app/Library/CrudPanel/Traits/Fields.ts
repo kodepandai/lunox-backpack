@@ -32,9 +32,11 @@ export interface IFields {
   /**
    * Return only registered field names.
    */
-  getStrippedSaveRequest(): ObjectOf<any>
+  getStrippedSaveRequest(): ObjectOf<any>;
 }
-const Fields: Trait<typeof BaseCrudPanel & Class<ISettings> & Class<IValidation>> = (s) =>
+const Fields: Trait<
+  typeof BaseCrudPanel & Class<ISettings> & Class<IValidation>
+> = (s) =>
   class extends s {
     public addField(field: Field) {
       return this.addFieldToOperationSettings(field);
@@ -62,17 +64,17 @@ const Fields: Trait<typeof BaseCrudPanel & Class<ISettings> & Class<IValidation>
         field.placeholder = field.label;
       }
 
-      if(typeof field.required == "undefined"){
+      if (typeof field.required == "undefined") {
         field.required = this.isRequired(field.name);
       }
       return field;
     }
 
-    public getAllFieldNames(){
-      return this.fields().map(f=>f.name);
+    public getAllFieldNames() {
+      return this.fields().map((f) => f.name);
     }
 
-    public getStrippedSaveRequest(){
+    public getStrippedSaveRequest() {
       return this.getRequest().only(this.getAllFieldNames());
     }
   };

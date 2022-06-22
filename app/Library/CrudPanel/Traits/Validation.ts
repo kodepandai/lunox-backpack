@@ -4,24 +4,24 @@ import type { BaseCrudPanel } from "../CrudPanel";
 import type { ISettings } from "./Settings";
 
 export interface IValidation {
-    /**
-     * Set Form Request validation.
-     */
-    setValidation(formRequestInstance: typeof FormRequest): void;
+  /**
+   * Set Form Request validation.
+   */
+  setValidation(formRequestInstance: typeof FormRequest): void;
 
-    /**
-     * Run validation of FromRequest
-     */
-    validateRequest(): Promise<Request>
+  /**
+   * Run validation of FromRequest
+   */
+  validateRequest(): Promise<Request>;
 
-    /**
-     * Check field is required
-     */
-    isRequired(inputName: string): boolean;
+  /**
+   * Check field is required
+   */
+  isRequired(inputName: string): boolean;
 }
 const Validation: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
   class extends s {
-    public setValidation(formRequestClass: typeof FormRequest){
+    public setValidation(formRequestClass: typeof FormRequest) {
       const formRequestInstance = this.request.setFormRequest(formRequestClass);
       this.setRequiredFields(formRequestInstance);
     }
@@ -29,11 +29,11 @@ const Validation: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
     /**
      * Set required fields from given FormRequest instance.
      */
-    protected setRequiredFields(formRequest: FormRequest){
+    protected setRequiredFields(formRequest: FormRequest) {
       const requiredFields: string[] = [];
       const rules = formRequest.rules();
       for (const key in rules) {
-        if(rules[key].includes("required")){
+        if (rules[key].includes("required")) {
           requiredFields.push(key);
         }
       }
@@ -43,7 +43,7 @@ const Validation: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
     public async validateRequest(): Promise<Request> {
       let request: Request;
       const formRequest = this.request.getFormRequest();
-      if(formRequest){
+      if (formRequest) {
         // if form request is registered, validate form
         await formRequest.validateForm();
         request = formRequest;
@@ -54,9 +54,10 @@ const Validation: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
       return request;
     }
 
-    public isRequired(inputName: string){
-      const requiredFields = this.getOperationSetting<string[]>("requiredFields");
-      if(!requiredFields) return false;
+    public isRequired(inputName: string) {
+      const requiredFields =
+        this.getOperationSetting<string[]>("requiredFields");
+      if (!requiredFields) return false;
       return requiredFields.includes(inputName);
     }
   };

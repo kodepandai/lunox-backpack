@@ -11,7 +11,7 @@ import Fields, { IFields } from "./Traits/Fields";
 import Validation, { IValidation } from "./Traits/Validation";
 import Create, { ICreate } from "./Traits/Create";
 import Access, { IAccess } from "./Traits/Access";
-import SaveActions, {ISaveActions } from "./Traits/SaveActions";
+import SaveActions, { ISaveActions } from "./Traits/SaveActions";
 
 export interface LayoutData {
   appName: string;
@@ -48,7 +48,7 @@ export class BaseCrudPanel {
   /**
    * Get Http Reqyest instance;
    */
-  public getRequest(){
+  public getRequest() {
     return this.request;
   }
 
@@ -111,8 +111,16 @@ export class BaseCrudPanel {
     };
   }
 }
-interface CrudPanel extends ISettings, IViews, IOperations, IColumns, 
-IFields, IValidation, ICreate, IAccess, ISaveActions{}
+interface CrudPanel
+  extends ISettings,
+    IViews,
+    IOperations,
+    IColumns,
+    IFields,
+    IValidation,
+    ICreate,
+    IAccess,
+    ISaveActions {}
 class CrudPanel extends Traitable(BaseCrudPanel).use(
   Access,
   Columns,
