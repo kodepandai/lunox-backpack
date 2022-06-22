@@ -1,5 +1,5 @@
 import type { CrudTrait } from "app/Model/Traits/CrudTrait";
-import { Model, ObjectOf, Traitable } from "lunox";
+import { ObjectOf, Traitable } from "lunox";
 import type { ExtendedModel } from "lunox/dist/Database/Eloquent/Model";
 import type { Request } from "lunox/dist/Http/Request";
 import Operations, { IOperations } from "./Traits/Operations";
@@ -8,6 +8,10 @@ import Columns, { IColumns } from "./Traits/Columns";
 import Views, { IViews } from "./Traits/Views";
 import type { Authenticatable } from "lunox/dist/Contracts/Auth/Authenticatable";
 import Fields, { IFields } from "./Traits/Fields";
+import Validation, { IValidation } from "./Traits/Validation";
+import Create, { ICreate } from "./Traits/Create";
+import Access, { IAccess } from "./Traits/Access";
+import SaveActions, {ISaveActions } from "./Traits/SaveActions";
 
 export interface LayoutData {
   appName: string;
@@ -26,7 +30,7 @@ export interface LayoutData {
   user?: Authenticatable & ObjectOf<any>;
 }
 export class BaseCrudPanel {
-  protected model!: typeof Model & CrudTrait; // entity's model
+  protected model!: typeof ExtendedModel & CrudTrait; // entity's model
   protected route!: string; // route for entity, used for links
   public entity_name = "entry";
   public entity_name_plural = "entries";
@@ -34,8 +38,18 @@ export class BaseCrudPanel {
   protected entry!: any;
   protected request!: Request;
 
+  /**
+   * Set Http Request instance.
+   */
   public setRequest(req: Request) {
     this.request = req;
+  }
+
+  /**
+   * Get Http Reqyest instance;
+   */
+  public getRequest(){
+    return this.request;
   }
 
   public setEntityNameStrings(singular: string, plural: string) {
@@ -97,13 +111,18 @@ export class BaseCrudPanel {
     };
   }
 }
-interface CrudPanel extends ISettings, IViews, IOperations, IColumns, IFields {}
+interface CrudPanel extends ISettings, IViews, IOperations, IColumns, 
+IFields, IValidation, ICreate, IAccess, ISaveActions{}
 class CrudPanel extends Traitable(BaseCrudPanel).use(
+  Access,
   Columns,
+  Create,
   Fields,
   Views,
+  SaveActions,
   Settings,
-  Operations
+  Operations,
+  Validation
 ) {}
 
 export default CrudPanel;
