@@ -5,7 +5,8 @@ const Text: FC<PropsWithChildren<any>> = ({
   name,
   label,
   placeholder,
-  ...attributes
+  error,
+  attributes
 }) => {
   return (
     <TextInput
@@ -14,6 +15,7 @@ const Text: FC<PropsWithChildren<any>> = ({
       label={label}
       type="text"
       placeholder={placeholder}
+      error={error}
       {...attributes}
     />
   );

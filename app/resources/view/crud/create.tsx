@@ -14,7 +14,7 @@ import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
 import type { Field } from "app/Library/CrudPanel/Traits/Fields";
 import * as components from "./fields/index";
 import { createRef, Fragment, useState } from "react";
-import { csrf_token } from "lunox/client";
+import { csrf_token, errors, old } from "lunox/client";
 import type { ButtonAction } from "app/Library/CrudPanel/Traits/SaveActions";
 
 export const onServer: OnServer = async (req, ctx: CrudContext) => {
@@ -37,10 +37,11 @@ export default ({
   entries: Model[];
   fields: Field[];
   layoutData: LayoutData;
-  saveActions: { options: ButtonAction[] };
+  saveActions: { options: ButtonAction[], selected: string };
+  currentSaveAction: string;
 }) => {
-  const [buttonAction, setButtonAction] = useState<ButtonAction>(
-    saveActions.options[0]
+  const [buttonAction, setButtonAction] = useState<ButtonAction|undefined>(
+    saveActions.options.find(x=>x.name == saveActions.selected)
   );
   const formRef = createRef<HTMLFormElement>();
   const doSubmit = (e: any) => {
@@ -74,9 +75,8 @@ export default ({
               return (
                 <Fragment key={field.name}>
                   <Grid.Col md={field.grid || 12}>
-                    {" "}
                     {/*TODO: make field wrapper configurable*/}
-                    <FieldComponent {...field} />
+                    <FieldComponent error={errors(field.name)?.message} defaultValue={old(field.name)} {...field}/>
                   </Grid.Col>
                   {field.break && <Grid.Col />}
                 </Fragment>
@@ -87,8 +87,8 @@ export default ({
             {buttonAction?.text}
           </Button>
           <Menu>
-            {saveActions.options.map((op) => (
-              <Menu.Item onClick={() => setButtonAction(op)}>
+            {saveActions.options.map((op, i) => (
+              <Menu.Item onClick={() => setButtonAction(op)} key={i}>
                 {op.text}
               </Menu.Item>
             ))}

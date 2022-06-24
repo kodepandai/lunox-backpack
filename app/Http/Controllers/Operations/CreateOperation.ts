@@ -50,6 +50,10 @@ const CreateOperation: Trait<typeof CrudController> = (s) =>
 
       // insert items to db
       await this.crud.create(this.crud.getStrippedSaveRequest());
+
+      this.crud.setSaveAction();
+
+      return this.crud.performSaveAction();
     }
   };
 

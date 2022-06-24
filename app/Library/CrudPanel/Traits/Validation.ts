@@ -40,18 +40,12 @@ const Validation: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
       this.setOperationSetting("requiredFields", requiredFields);
     }
 
-    public async validateRequest(): Promise<Request> {
-      let request: Request;
+    public async validateRequest() {
       const formRequest = this.request.getFormRequest();
       if (formRequest) {
         // if form request is registered, validate form
         await formRequest.validateForm();
-        request = formRequest;
-      } else {
-        // else, just return current Http Request instance
-        request = this.getRequest();
       }
-      return request;
     }
 
     public isRequired(inputName: string) {

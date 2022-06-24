@@ -116,7 +116,7 @@ const CrudLayout: FC<PropsWithChildren<{ data: LayoutData }>> = ({
                 </div>
               </Header>
             }
-            navbar={<Sidebar></Sidebar>}
+            navbar={<Sidebar opened={opened}></Sidebar>}
             // aside={}
 
             footer={

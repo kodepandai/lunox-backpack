@@ -13,6 +13,8 @@ class User extends Traitable(Model).use(Authenticatable, CrudTrait) {
   phone!: string;
   active!: boolean;
 
+  public static fillable = ["username", "email", "password"];
+
   protected static table = "users";
   // protected static primaryKey = "id";
   // protected static timestamps = true;

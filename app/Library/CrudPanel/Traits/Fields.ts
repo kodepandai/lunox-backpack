@@ -11,7 +11,9 @@ export interface Field {
   placeholder?: string;
   grid?: number;
   break?: boolean;
-  required?: boolean;
+  attributes?: {
+    required?: boolean
+  };
   [key: string]: any;
 }
 export interface IFields {
@@ -64,8 +66,9 @@ const Fields: Trait<
         field.placeholder = field.label;
       }
 
-      if (typeof field.required == "undefined") {
-        field.required = this.isRequired(field.name);
+      if(!field.attributes) field.attributes = {};
+      if (typeof field.attributes.required == "undefined") {
+        field.attributes.required = this.isRequired(field.name);
       }
       return field;
     }

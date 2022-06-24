@@ -11,7 +11,7 @@ class UserRequest extends FormRequest {
 
   public attributes(): ObjectOf<any> {
     return {
-      email: "alamat surel",
+      password_confirm: "password confirmation",
     };
   }
 }
