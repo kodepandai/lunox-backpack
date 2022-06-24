@@ -1,10 +1,11 @@
 import CrudPanel from "app/Library/CrudPanel/CrudPanel";
 import { Controller, Str } from "lunox";
 import type { CreateOperation } from "./Operations/CreateOperation";
+import type { DeleteOperation } from "./Operations/DeleteOperation";
 import type { ListOperation } from "./Operations/ListOperation";
 
 // CrudController may have this methods from Crud Traits
-interface CrudController extends ListOperation, CreateOperation {}
+interface CrudController extends ListOperation, CreateOperation, DeleteOperation {}
 
 export interface CrudContext {
   crud: CrudPanel;

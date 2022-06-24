@@ -12,6 +12,7 @@ import Validation, { IValidation } from "./Traits/Validation";
 import Create, { ICreate } from "./Traits/Create";
 import Access, { IAccess } from "./Traits/Access";
 import SaveActions, { ISaveActions } from "./Traits/SaveActions";
+import Delete, { IDelete } from "./Traits/Delete";
 
 export interface LayoutData {
   appName: string;
@@ -116,6 +117,7 @@ interface CrudPanel
     IViews,
     IOperations,
     IColumns,
+    IDelete,
     IFields,
     IValidation,
     ICreate,
@@ -125,6 +127,7 @@ class CrudPanel extends Traitable(BaseCrudPanel).use(
   Access,
   Columns,
   Create,
+  Delete,
   Fields,
   Views,
   SaveActions,

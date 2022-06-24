@@ -3,11 +3,13 @@ import { Traitable } from "lunox";
 import UserRequest from "../Request/UserRequest";
 import CrudController from "./CrudController";
 import CreateOperation from "./Operations/CreateOperation";
+import DeleteOperation from "./Operations/DeleteOperation";
 import ListOperation from "./Operations/ListOperation";
 
 class UserCrudController extends Traitable(CrudController).use(
   ListOperation,
-  CreateOperation
+  CreateOperation,
+  DeleteOperation
 ) {
   public setup(): void {
     this.crud.setEntityNameStrings("User", "Users");

@@ -13,6 +13,7 @@ import {
 } from "@mantine/core";
 import CrudLayout from "./base/layout";
 import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
+import ButtonDelete from "./buttons/delete";
 
 export const onServer: OnServer = async (req, ctx: CrudContext) => {
   const model = ctx.crud.getModel();
@@ -58,6 +59,7 @@ export default ({
                 {columns.map((column) => (
                   <th key={column.name}>{column.label}</th>
                 ))}
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -80,6 +82,9 @@ export default ({
                         <td key={ci}></td>
                       );
                     })}
+                    <td>
+                      <ButtonDelete id={entry.id} route={layoutData.route}></ButtonDelete>
+                    </td>
                   </tr>
                 );
               })}
