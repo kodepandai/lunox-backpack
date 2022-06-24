@@ -1,10 +1,9 @@
 import { Route, Trait } from "lunox";
 import type CrudController from "app/Http/Controllers/CrudController";
-import type { Request } from "lunox/dist/Http/Request";
 
 export interface CreateOperation {
   create(): any;
-  store(req: Request): any;
+  store(): any;
 }
 const CreateOperation: Trait<typeof CrudController> = (s) =>
   class extends s {
@@ -37,6 +36,8 @@ const CreateOperation: Trait<typeof CrudController> = (s) =>
     }
 
     public create() {
+      this.crud.hasAccessOrFail("create");
+
       this.data.crud = this.crud;
 
       // this.data should be sent via view context
@@ -45,6 +46,7 @@ const CreateOperation: Trait<typeof CrudController> = (s) =>
     }
 
     public async store() {
+      this.crud.hasAccessOrFail("create");
       // validate the Form Request validation
       await this.crud.validateRequest();
 

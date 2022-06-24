@@ -39,6 +39,9 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
     }
 
     public index() {
+
+      this.crud.hasAccessOrFail("list");
+
       this.data.crud = this.crud;
       // this.data should be sent via view context
       // so can be accessed via onServer method on view
@@ -46,10 +49,14 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
     }
 
     public search() {
+      this.crud.hasAccessOrFail("list");
+      
       return "search operation";
     }
 
     public showDetailsRow() {
+      this.crud.hasAccessOrFail("list");
+
       return "show details row operation";
     }
   };
