@@ -15,11 +15,12 @@ import {
   Divider,
   Avatar,
 } from "@mantine/core";
-import {NotificationsProvider} from "@mantine/notifications";
+import {NotificationsProvider, showNotification} from "@mantine/notifications";
 import {ModalsProvider} from "@mantine/modals";
 import Sidebar from "./sidebar";
 import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
 import Loader from "./loader";
+import { session } from "lunox/client";
 
 const CrudLayout: FC<PropsWithChildren<{ data: LayoutData }>> = ({
   children,
@@ -44,14 +45,25 @@ const CrudLayout: FC<PropsWithChildren<{ data: LayoutData }>> = ({
       setColorScheme(savedColorScheme);
     });
   }
+
+  const onLoad = ()=>{
+    if(session("message")){
+      setTimeout(()=>{
+        showNotification({
+          message: session("message"),
+          color: session("status") > 400? "red": "green"
+        });
+      }, 500);
+    }
+  };
   return (
-    <Loader>
+    <Loader onLoad={onLoad}>
       <ColorSchemeProvider
         colorScheme={colorScheme}
         toggleColorScheme={toggleColorScheme}
       >
         <MantineProvider theme={{ colorScheme }}>
-          <NotificationsProvider>
+          <NotificationsProvider position="top-right" autoClose={3000}>
             <ModalsProvider>
               <AppShell
                 styles={{

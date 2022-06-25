@@ -65,6 +65,7 @@ export default ({
           method="POST"
           onSubmit={doSubmit}
           ref={formRef}
+          autoComplete="off"
         >
           <input type="hidden" name="_token" value={csrf_token()} />
           <input type="hidden" name="_save_action" value={buttonAction?.name} />

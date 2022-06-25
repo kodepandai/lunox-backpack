@@ -6,7 +6,8 @@ const Text: FC<PropsWithChildren<any>> = ({
   label,
   placeholder,
   error,
-  attributes
+  attributes,
+  defaultValue
 }) => {
   return (
     <TextInput
@@ -16,6 +17,8 @@ const Text: FC<PropsWithChildren<any>> = ({
       type="text"
       placeholder={placeholder}
       error={error}
+      autoComplete="off"
+      defaultValue={defaultValue}
       {...attributes}
     />
   );

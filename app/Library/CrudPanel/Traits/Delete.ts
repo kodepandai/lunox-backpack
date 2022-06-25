@@ -1,4 +1,4 @@
-import { Class, NotFoundHttpException, ObjectOf, Trait } from "lunox";
+import { Class, NotFoundHttpException, Trait } from "lunox";
 import type { BaseCrudPanel } from "../CrudPanel";
 import type { ISettings } from "./Settings";
 

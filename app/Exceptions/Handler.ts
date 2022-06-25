@@ -30,6 +30,7 @@ class Handler extends ExceptionHandler {
 
       return back().withInput({ except: "password" }).with({
         message: e.message,
+        status: e.status,
         errors: e.errors(),
       });
     });

@@ -19,9 +19,10 @@ const Delete = ({id, route}:{id?:number, route?:string})=>{
         color: "red"
       },
       onConfirm: ()=>{
-        Axios.delete(`${route}/${id}`).then(json=>{
+        Axios.delete(`${route}/${id}`).then(()=>{
           showNotification({
-            message: "Data Deleted Successfully"
+            message: "Data Deleted Successfully",
+            color: "green"
           });
         })
           .catch(err=>{
