@@ -7,7 +7,7 @@ const Text: FC<PropsWithChildren<any>> = ({
   placeholder,
   error,
   attributes,
-  defaultValue
+  defaultValue,
 }) => {
   return (
     <TextInput

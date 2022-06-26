@@ -37,11 +37,11 @@ export default ({
   entries: Model[];
   fields: Field[];
   layoutData: LayoutData;
-  saveActions: { options: ButtonAction[], selected: string };
+  saveActions: { options: ButtonAction[]; selected: string };
   currentSaveAction: string;
 }) => {
-  const [buttonAction, setButtonAction] = useState<ButtonAction|undefined>(
-    saveActions.options.find(x=>x.name == saveActions.selected)
+  const [buttonAction, setButtonAction] = useState<ButtonAction | undefined>(
+    saveActions.options.find((x) => x.name == saveActions.selected)
   );
   const formRef = createRef<HTMLFormElement>();
   const doSubmit = (e: any) => {
@@ -77,9 +77,13 @@ export default ({
                 <Fragment key={field.name}>
                   <Grid.Col md={field.grid || 12}>
                     {/*TODO: make field wrapper configurable*/}
-                    <FieldComponent error={errors(field.name)?.message} defaultValue={old(field.name)} {...field}/>
+                    <FieldComponent
+                      error={errors(field.name)?.message}
+                      defaultValue={old(field.name)}
+                      {...field}
+                    />
                   </Grid.Col>
-                  {field.break && <Grid.Col p={0}/>}
+                  {field.break && <Grid.Col p={0} />}
                 </Fragment>
               );
             })}

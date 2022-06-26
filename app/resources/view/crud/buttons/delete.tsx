@@ -3,40 +3,39 @@ import { useModals } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 import Axios from "axios";
 
-
-const Delete = ({id, route}:{id?:number, route?:string})=>{
+const Delete = ({ id, route }: { id?: number; route?: string }) => {
   const modal = useModals();
-  const deleteData = ()=>{
+  const deleteData = () => {
     // confirm delete
     modal.openConfirmModal({
       title: "Are you sure?",
       children: "Data will be deleted",
       labels: {
         confirm: "Delete",
-        cancel: "Cancel"
+        cancel: "Cancel",
       },
       confirmProps: {
-        color: "red"
+        color: "red",
       },
-      onConfirm: ()=>{
-        Axios.delete(`${route}/${id}`).then(()=>{
-          showNotification({
-            message: "Data Deleted Successfully",
-            color: "green"
-          });
-        })
-          .catch(err=>{
+      onConfirm: () => {
+        Axios.delete(`${route}/${id}`)
+          .then(() => {
             showNotification({
-              message: err.message
+              message: "Data Deleted Successfully",
+              color: "green",
+            });
+          })
+          .catch((err) => {
+            showNotification({
+              message: err.message,
             });
           });
-      }
+      },
     });
-
   };
   return (
     <Button compact color="red" size="xs" onClick={deleteData}>
-        delete
+      delete
     </Button>
   );
 };

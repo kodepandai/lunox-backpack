@@ -12,7 +12,7 @@ export interface Field {
   grid?: number;
   break?: boolean;
   attributes?: {
-    required?: boolean
+    required?: boolean;
   };
   [key: string]: any;
 }
@@ -66,7 +66,7 @@ const Fields: Trait<
         field.placeholder = field.label;
       }
 
-      if(!field.attributes) field.attributes = {};
+      if (!field.attributes) field.attributes = {};
       if (typeof field.attributes.required == "undefined") {
         field.attributes.required = this.isRequired(field.name);
       }

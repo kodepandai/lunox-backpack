@@ -12,7 +12,7 @@ const Delete: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
   class extends s {
     public async delete(id: number) {
       const deleted = await this.model.query().deleteById(id);
-      if(!deleted){
+      if (!deleted) {
         throw new NotFoundHttpException();
       }
     }

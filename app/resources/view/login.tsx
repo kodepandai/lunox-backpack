@@ -7,7 +7,10 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { NotificationsProvider, showNotification } from "@mantine/notifications";
+import {
+  NotificationsProvider,
+  showNotification,
+} from "@mantine/notifications";
 import { csrf_token, old, session } from "lunox/client";
 import Loader from "./crud/base/loader";
 
@@ -15,7 +18,7 @@ const Login = ({ version = {} }: { version: any }) => {
   const onLoad = () => {
     // show message from flashed session
     if (session("message")) {
-      setTimeout(()=>{
+      setTimeout(() => {
         showNotification({
           message: session("message"),
         });
@@ -58,7 +61,7 @@ const Login = ({ version = {} }: { version: any }) => {
             </Paper>
           </Center>
           <Text color="dimmed" size="xs" mt={10}>
-          lunox backpack v{version.app} - lunox v{version.framework}
+            lunox backpack v{version.app} - lunox v{version.framework}
           </Text>
         </Container>
       </NotificationsProvider>

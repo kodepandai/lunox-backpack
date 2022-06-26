@@ -19,7 +19,7 @@ export interface ISaveActions {
   /**
    * Redirect to the correct URL, depending on which save action has been selected.
    */
-  performSaveAction(itemId?:number): Response;
+  performSaveAction(itemId?: number): Response;
 
   /**
    * Register default save actions into CRUD.
@@ -34,33 +34,35 @@ export interface ISaveActions {
   /**
    * Get list of visible save actions.
    */
-  getSaveAction(): { options: ButtonAction[], selected: string };
+  getSaveAction(): { options: ButtonAction[]; selected: string };
 
   /**
    * save current save action on session.
    */
   setSaveAction(): void;
 }
-const SaveActions: Trait<typeof BaseCrudPanel & Class<ISettings> & Class<IOperations>> = (s) =>
+const SaveActions: Trait<
+  typeof BaseCrudPanel & Class<ISettings> & Class<IOperations>
+> = (s) =>
   class extends s {
-    public performSaveAction(itemId?:number) {
+    public performSaveAction(itemId?: number) {
       const request = this.getRequest();
-      itemId = itemId||request.input("id");
+      itemId = itemId || request.input("id");
       const saveAction = request.input("_save_action");
       const actions = this.getOperationSetting<SaveAction[]>("save_actions");
       let redirect_url = "__back";
-      const selectedSaveAction = actions.find(x=>x.name == saveAction);
+      const selectedSaveAction = actions.find((x) => x.name == saveAction);
       // save selected action for next operation
-      if(selectedSaveAction){
+      if (selectedSaveAction) {
         redirect_url = selectedSaveAction.redirect(this, request, itemId);
       }
       if (request.wantsJson()) {
         return Response.make({
           success: true,
           data: this.entry,
-          redirect_url
+          redirect_url,
         });
-      } 
+      }
 
       return redirect(redirect_url);
     }
@@ -76,7 +78,7 @@ const SaveActions: Trait<typeof BaseCrudPanel & Class<ISettings> & Class<IOperat
         {
           name: "save_and_new",
           visible: (crud) => crud.hasAccess("create"),
-          redirect: (crud) => crud.getRoute()+"/create",
+          redirect: (crud) => crud.getRoute() + "/create",
           button_text: "Save and Create New", //TODO: translate me
         },
         // TODO: add more save actions
@@ -99,7 +101,10 @@ const SaveActions: Trait<typeof BaseCrudPanel & Class<ISettings> & Class<IOperat
           name: option.name,
           text: option.button_text,
         })),
-        selected: this.request.session().get(this.getCurrentOperation()+".saveAction") ||"save_and_back"
+        selected:
+          this.request
+            .session()
+            .get(this.getCurrentOperation() + ".saveAction") || "save_and_back",
       };
     }
 
@@ -109,9 +114,11 @@ const SaveActions: Trait<typeof BaseCrudPanel & Class<ISettings> & Class<IOperat
       return actions.filter((action) => action.visible(this as any));
     }
 
-    public setSaveAction(){
+    public setSaveAction() {
       const saveAction = this.request.input("_save_action");
-      this.request.session().put(this.getCurrentOperation()+".saveAction", saveAction);
+      this.request
+        .session()
+        .put(this.getCurrentOperation() + ".saveAction", saveAction);
     }
   };
 

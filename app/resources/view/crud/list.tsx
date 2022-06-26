@@ -83,7 +83,10 @@ export default ({
                       );
                     })}
                     <td>
-                      <ButtonDelete id={entry.id} route={layoutData.route}></ButtonDelete>
+                      <ButtonDelete
+                        id={entry.id}
+                        route={layoutData.route}
+                      ></ButtonDelete>
                     </td>
                   </tr>
                 );

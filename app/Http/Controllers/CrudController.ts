@@ -5,7 +5,10 @@ import type { DeleteOperation } from "./Operations/DeleteOperation";
 import type { ListOperation } from "./Operations/ListOperation";
 
 // CrudController may have this methods from Crud Traits
-interface CrudController extends ListOperation, CreateOperation, DeleteOperation {}
+interface CrudController
+  extends ListOperation,
+    CreateOperation,
+    DeleteOperation {}
 
 export interface CrudContext {
   crud: CrudPanel;

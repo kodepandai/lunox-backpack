@@ -15,8 +15,11 @@ import {
   Divider,
   Avatar,
 } from "@mantine/core";
-import {NotificationsProvider, showNotification} from "@mantine/notifications";
-import {ModalsProvider} from "@mantine/modals";
+import {
+  NotificationsProvider,
+  showNotification,
+} from "@mantine/notifications";
+import { ModalsProvider } from "@mantine/modals";
 import Sidebar from "./sidebar";
 import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
 import Loader from "./loader";
@@ -46,12 +49,12 @@ const CrudLayout: FC<PropsWithChildren<{ data: LayoutData }>> = ({
     });
   }
 
-  const onLoad = ()=>{
-    if(session("message")){
-      setTimeout(()=>{
+  const onLoad = () => {
+    if (session("message")) {
+      setTimeout(() => {
         showNotification({
           message: session("message"),
-          color: session("status") > 400? "red": "green"
+          color: session("status") > 400 ? "red" : "green",
         });
       }, 500);
     }
@@ -68,7 +71,9 @@ const CrudLayout: FC<PropsWithChildren<{ data: LayoutData }>> = ({
               <AppShell
                 styles={{
                   root: {
-                    background: dark ? theme.colors.dark[8] : theme.colors.gray[0],
+                    background: dark
+                      ? theme.colors.dark[8]
+                      : theme.colors.gray[0],
                     color: dark ? theme.colors.gray[0] : theme.colors.dark[8],
                   },
                 }}
@@ -107,16 +112,18 @@ const CrudLayout: FC<PropsWithChildren<{ data: LayoutData }>> = ({
                         >
                           <Menu.Label>Application</Menu.Label>
                           <Menu.Item
-                            icon={<div className="i-ant-design-setting-outlined" />}
+                            icon={
+                              <div className="i-ant-design-setting-outlined" />
+                            }
                           >
-                        Settings
+                            Settings
                           </Menu.Item>
 
                           <Divider />
 
                           <Menu.Label>Profile</Menu.Label>
                           <Menu.Item component="a" href="/logout">
-                        Logout
+                            Logout
                           </Menu.Item>
                         </Menu>
                         <Button
@@ -138,7 +145,7 @@ const CrudLayout: FC<PropsWithChildren<{ data: LayoutData }>> = ({
                 footer={
                   <Footer height={40} p="xs">
                     <small>
-                  Built with Lunox Backpack v{data.version.app} (lunox v
+                      Built with Lunox Backpack v{data.version.app} (lunox v
                       {data.version.framework})
                     </small>
                   </Footer>

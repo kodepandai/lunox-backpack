@@ -5,7 +5,10 @@ import { Loader as MantineLoader } from "@mantine/core";
  * This component to prevent mantine ui flashed during page load
  * This is just workaround before we support SSR mode for mantine ui
  */
-const Loader: FC<PropsWithChildren<any>> = ({ children, onLoad = ()=>{}}) => {
+const Loader: FC<PropsWithChildren<any>> = ({
+  children,
+  onLoad = () => {},
+}) => {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     setLoaded(true);

@@ -15,7 +15,6 @@ const DeleteOperation: Trait<typeof CrudController> = (s) =>
         operation: "delete",
         segment,
       });
-
     }
 
     /**
@@ -30,7 +29,7 @@ const DeleteOperation: Trait<typeof CrudController> = (s) =>
       //  TODO: complete me
     }
 
-    public destroy(req: Request, id: number){
+    public destroy(req: Request, id: number) {
       this.crud.hasAccessOrFail("delete");
       return this.crud.delete(id);
     }

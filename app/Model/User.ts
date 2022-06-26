@@ -15,7 +15,14 @@ class User extends Traitable(Model).use(Authenticatable, CrudTrait) {
   phone!: string;
   active!: boolean;
 
-  public static fillable = ["username", "email", "password", "first_name", "last_name", "phone"];
+  public static fillable = [
+    "username",
+    "email",
+    "password",
+    "first_name",
+    "last_name",
+    "phone",
+  ];
 
   protected static table = "users";
 
@@ -23,13 +30,16 @@ class User extends Traitable(Model).use(Authenticatable, CrudTrait) {
   // protected static primaryKey = "id";
   // protected static timestamps = true;
 
-  public setPasswordAttribute(value: string){
-    if(!value) return;
-    this.attributes["password"] = bcrypt.hashSync(value, bcrypt.genSaltSync(10));
+  public setPasswordAttribute(value: string) {
+    if (!value) return;
+    this.attributes["password"] = bcrypt.hashSync(
+      value,
+      bcrypt.genSaltSync(10)
+    );
   }
 
-  public getFullNameAttribute(){
-    return this.first_name + " "+ this.last_name;
+  public getFullNameAttribute() {
+    return this.first_name + " " + this.last_name;
   }
 }
 export default User;

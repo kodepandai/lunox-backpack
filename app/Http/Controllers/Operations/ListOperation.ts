@@ -39,7 +39,6 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
     }
 
     public index() {
-
       this.crud.hasAccessOrFail("list");
 
       this.data.crud = this.crud;
@@ -50,7 +49,7 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
 
     public search() {
       this.crud.hasAccessOrFail("list");
-      
+
       return "search operation";
     }
 
