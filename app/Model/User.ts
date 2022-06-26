@@ -10,19 +10,26 @@ class User extends Traitable(Model).use(Authenticatable, CrudTrait) {
   username!: string;
   email!: string;
   password!: string;
-  fullname!: string;
+  first_name!: string;
+  last_name!: string;
   phone!: string;
   active!: boolean;
 
-  public static fillable = ["username", "email", "password", "fullname", "phone"];
+  public static fillable = ["username", "email", "password", "first_name", "last_name", "phone"];
 
   protected static table = "users";
+
+  protected static append = ["full_name"];
   // protected static primaryKey = "id";
   // protected static timestamps = true;
 
   public setPasswordAttribute(value: string){
     if(!value) return;
     this.attributes["password"] = bcrypt.hashSync(value, bcrypt.genSaltSync(10));
+  }
+
+  public getFullNameAttribute(){
+    return this.first_name + " "+ this.last_name;
   }
 }
 export default User;

@@ -79,7 +79,7 @@ export default ({
                     {/*TODO: make field wrapper configurable*/}
                     <FieldComponent error={errors(field.name)?.message} defaultValue={old(field.name)} {...field}/>
                   </Grid.Col>
-                  {field.break && <Grid.Col />}
+                  {field.break && <Grid.Col p={0}/>}
                 </Fragment>
               );
             })}

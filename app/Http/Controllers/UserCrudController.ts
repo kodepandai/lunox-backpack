@@ -25,7 +25,7 @@ class UserCrudController extends Traitable(CrudController).use(
       label: "User Name",
     });
     this.crud.addColumn({
-      name: "fullname",
+      name: "full_name",
       label: "Full Name",
     });
     this.crud.addColumn({
@@ -50,8 +50,14 @@ class UserCrudController extends Traitable(CrudController).use(
     });
 
     this.crud.addField({
-      name: "fullname",
-      label: "Full Name",
+      name: "first_name",
+      label: "First Name",
+      grid: 6,
+    });
+
+    this.crud.addField({
+      name: "last_name",
+      label: "Last Name",
       grid: 6,
     });
 
@@ -59,6 +65,7 @@ class UserCrudController extends Traitable(CrudController).use(
       name: "phone",
       label: "Phone Number",
       grid: 6,
+      break: true,
     });
 
     this.crud.addField({
