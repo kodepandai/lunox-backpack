@@ -30,7 +30,7 @@ const Admin = ({
       }}
     >
       <Paper shadow="md" p={10}>
-        Welcome {user?.full_name}
+        Welcome {user?.first_name} {user?.last_name}
       </Paper>
     </CrudLayout>
   );

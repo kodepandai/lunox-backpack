@@ -3,13 +3,13 @@ import { useModals } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 import Axios from "axios";
 
-const Delete = ({ id, route }: { id?: number; route?: string }) => {
+const Delete = ({ id, route, onDelete, entityName="Data"}: { id: number; route?: string, onDelete: (id: number)=>void, entityName?: string}) => {
   const modal = useModals();
   const deleteData = () => {
     // confirm delete
     modal.openConfirmModal({
       title: "Are you sure?",
-      children: "Data will be deleted",
+      children: entityName+" will be deleted",
       labels: {
         confirm: "Delete",
         cancel: "Cancel",
@@ -21,13 +21,15 @@ const Delete = ({ id, route }: { id?: number; route?: string }) => {
         Axios.delete(`${route}/${id}`)
           .then(() => {
             showNotification({
-              message: "Data Deleted Successfully",
+              message: entityName+" Deleted Successfully",
               color: "green",
             });
+            onDelete(id);
           })
           .catch((err) => {
             showNotification({
-              message: err.message,
+              message: err.response?.data?.message,
+              color: "red"
             });
           });
       },

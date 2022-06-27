@@ -43,6 +43,10 @@ export default ({
         setEntries(res.data);
       });
   }, []);
+
+  const deleteEntry = (id:number)=>{
+    setEntries(prev=>prev.filter(x=>x.id!=id));
+  };
   return (
     <CrudLayout data={layoutData}>
       <Breadcrumbs className="mb-4">
@@ -92,8 +96,10 @@ export default ({
                     })}
                     <td>
                       <ButtonDelete
+                        entityName={layoutData.entity?.name.singular}
                         id={entry.id}
                         route={layoutData.route}
+                        onDelete={deleteEntry}
                       ></ButtonDelete>
                     </td>
                   </tr>

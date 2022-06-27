@@ -1,5 +1,7 @@
+import ApiException from "app/Exceptions/ApiException";
 import User from "app/Model/User";
 import { Traitable } from "lunox";
+import type { Request } from "lunox/dist/Http/Request";
 import UserRequest from "../Request/UserRequest";
 import CrudController from "./CrudController";
 import CreateOperation from "./Operations/CreateOperation";
@@ -80,6 +82,17 @@ class UserCrudController extends Traitable(CrudController).use(
       type: "password",
       grid: 6,
     });
+
+  }
+
+  public async destroy(req: Request, id: number) {
+    if(id == 1){
+      throw new ApiException("Cannot delete super admin!");
+    }
+    if((await req.auth().user())?.id == id){
+      throw new ApiException("Cannot delete current user!");
+    }
+    super.destroy(req, id);
   }
 }
 
