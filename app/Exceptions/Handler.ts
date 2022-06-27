@@ -47,7 +47,6 @@ class Handler extends ExceptionHandler {
 
     this.renderable(HttpException, (e, req) => {
       if (req.wantsJson()) {
-        console.log("handler", e.getStatusCode());
         return Response.make(
           {
             message: e.message,
