@@ -13,6 +13,7 @@ import Create, { ICreate } from "./Traits/Create";
 import Access, { IAccess } from "./Traits/Access";
 import SaveActions, { ISaveActions } from "./Traits/SaveActions";
 import Delete, { IDelete } from "./Traits/Delete";
+import Read, { IRead } from "./Traits/Read";
 
 export interface LayoutData {
   appName: string;
@@ -68,6 +69,7 @@ export class BaseCrudPanel {
       throw new Error("please use CrudTrait on the model");
     }
     this.model = model;
+    this.entry = null;
   }
 
   public getModel<T = typeof ExtendedModel>() {
@@ -122,6 +124,7 @@ interface CrudPanel
     IValidation,
     ICreate,
     IAccess,
+    IRead,
     ISaveActions {}
 class CrudPanel extends Traitable(BaseCrudPanel).use(
   Access,
@@ -133,6 +136,7 @@ class CrudPanel extends Traitable(BaseCrudPanel).use(
   SaveActions,
   Settings,
   Operations,
+  Read,
   Validation
 ) {}
 

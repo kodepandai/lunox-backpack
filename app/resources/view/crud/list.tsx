@@ -1,6 +1,6 @@
 import type { CrudContext } from "app/Http/Controllers/CrudController";
 import type { Column } from "app/Library/CrudPanel/Traits/Columns";
-import type { Model, OnServer } from "lunox";
+import type { OnServer } from "lunox";
 import * as components from "./columns/index";
 import {
   Anchor,
@@ -14,27 +14,35 @@ import {
 import CrudLayout from "./base/layout";
 import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
 import ButtonDelete from "./buttons/delete";
+import { useEffect, useState } from "react";
+import Axios from "axios";
 
 export const onServer: OnServer = async (req, ctx: CrudContext) => {
-  const model = ctx.crud.getModel();
   const columns = ctx.crud.columns();
 
   return {
-    entries: await model.query(),
     columns,
     layoutData: await ctx.crud.getLayoutData(),
   };
 };
 
 export default ({
-  entries,
   columns,
   layoutData,
 }: {
-  entries: Model[];
   columns: Column[];
   layoutData: LayoutData;
 }) => {
+
+  const [entries, setEntries] = useState<any[]>([]);
+
+  useEffect(()=>{
+    Axios.get(`${layoutData.route}/search`)
+      .then(res =>{
+        console.log(res);
+        setEntries(res.data);
+      });
+  }, []);
   return (
     <CrudLayout data={layoutData}>
       <Breadcrumbs className="mb-4">

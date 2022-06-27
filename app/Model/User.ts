@@ -24,9 +24,10 @@ class User extends Traitable(Model).use(Authenticatable, CrudTrait) {
     "phone",
   ];
 
+  protected static hidden = ["password"];
+
   protected static table = "users";
 
-  protected static append = ["full_name"];
   // protected static primaryKey = "id";
   // protected static timestamps = true;
 

@@ -1,4 +1,4 @@
-import { Route, Trait } from "lunox";
+import { Response, Route, Trait } from "lunox";
 import type CrudController from "app/Http/Controllers/CrudController";
 
 export interface ListOperation {
@@ -16,7 +16,7 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
         operation: "list",
         segment,
       });
-      Route.post(segment + "/search", [controller, "search"], {
+      Route.get(segment + "/search", [controller, "search"], {
         operation: "list",
         segment,
       });
@@ -47,10 +47,10 @@ const ListOperation: Trait<typeof CrudController> = (s) =>
       return view(this.crud.getListView()).withContext(this.data);
     }
 
-    public search() {
+    public async search() {
       this.crud.hasAccessOrFail("list");
 
-      return "search operation";
+      return await this.crud.getEntries();
     }
 
     public showDetailsRow() {
