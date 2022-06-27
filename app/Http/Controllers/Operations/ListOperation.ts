@@ -1,4 +1,4 @@
-import { Response, Route, Trait } from "lunox";
+import { Route, Trait } from "lunox";
 import type CrudController from "app/Http/Controllers/CrudController";
 
 export interface ListOperation {

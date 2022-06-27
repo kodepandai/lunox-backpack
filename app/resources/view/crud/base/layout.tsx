@@ -106,7 +106,9 @@ const CrudLayout: FC<PropsWithChildren<{ data: LayoutData }>> = ({
                           control={
                             <Button variant="subtle" py={0} color="gray">
                               <Avatar radius="xl" size={25} mr={5}></Avatar>
-                              {data.user?.first_name + " "+data.user?.last_name}
+                              {data.user?.first_name +
+                                " " +
+                                data.user?.last_name}
                             </Button>
                           }
                         >

@@ -33,19 +33,17 @@ export default ({
   columns: Column[];
   layoutData: LayoutData;
 }) => {
-
   const [entries, setEntries] = useState<any[]>([]);
 
-  useEffect(()=>{
-    Axios.get(`${layoutData.route}/search`)
-      .then(res =>{
-        console.log(res);
-        setEntries(res.data);
-      });
+  useEffect(() => {
+    Axios.get(`${layoutData.route}/search`).then((res) => {
+      console.log(res);
+      setEntries(res.data);
+    });
   }, []);
 
-  const deleteEntry = (id:number)=>{
-    setEntries(prev=>prev.filter(x=>x.id!=id));
+  const deleteEntry = (id: number) => {
+    setEntries((prev) => prev.filter((x) => x.id != id));
   };
   return (
     <CrudLayout data={layoutData}>

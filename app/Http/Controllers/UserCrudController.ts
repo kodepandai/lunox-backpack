@@ -82,14 +82,13 @@ class UserCrudController extends Traitable(CrudController).use(
       type: "password",
       grid: 6,
     });
-
   }
 
   public async destroy(req: Request, id: number) {
-    if(id == 1){
+    if (id == 1) {
       throw new ApiException("Cannot delete super admin!");
     }
-    if((await req.auth().user())?.id == id){
+    if ((await req.auth().user())?.id == id) {
       throw new ApiException("Cannot delete current user!");
     }
     super.destroy(req, id);
