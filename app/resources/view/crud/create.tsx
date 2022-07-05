@@ -10,12 +10,12 @@ import {
   Title,
 } from "@mantine/core";
 import CrudLayout from "./base/layout";
-import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
 import type { Field } from "app/Library/CrudPanel/Traits/Fields";
 import * as components from "./fields/index";
 import { createRef, Fragment, useState } from "react";
 import { csrf_token, errors, old } from "lunox/client";
 import type { ButtonAction } from "app/Library/CrudPanel/Traits/SaveActions";
+import type { LayoutData } from "app/Library/CrudPanel/Traits/Views";
 
 export const onServer: OnServer = async (req, ctx: CrudContext) => {
   const model = ctx.crud.getModel();

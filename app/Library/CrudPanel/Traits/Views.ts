@@ -1,13 +1,38 @@
-import type { Class, Trait } from "lunox";
+import type { Class, ObjectOf, Trait } from "lunox";
 import type { ISettings } from "app/Library/CrudPanel/Traits/Settings";
 import type { BaseCrudPanel } from "../CrudPanel";
+import type { Authenticatable } from "lunox/dist/Contracts/Auth/Authenticatable";
 
+export interface LayoutData {
+  appName: string;
+  title: string;
+  route?: string;
+  entity?: {
+    name: {
+      singular: string;
+      plural: string;
+    };
+    id?: number;
+  };
+  version: {
+    framework: string;
+    app: string;
+  };
+  user?: Authenticatable & ObjectOf<any>;
+}
 export interface IViews {
   setListView(view: string): void;
   getListView(): string;
 
   setCreateView(view: string): void;
   getCreateView(): string;
+
+  setShowView(view: string): void;
+  getShowView(): string;
+   /**
+   * get data to be injected on crud layout view
+   */
+  getLayoutData(): Promise<LayoutData> 
 }
 const Views: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
   class extends s {
@@ -25,6 +50,31 @@ const Views: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
 
     public getCreateView() {
       return this.get("create.view") || "crud.create";
+    }
+
+    public getShowView() {
+      return this.get("show.view") || "crud.show";
+    }
+
+    public setShowView() {
+      this.set("show.view", view);
+    }
+
+    public async getLayoutData(): Promise<LayoutData> {
+      return {
+        appName: config("app.name"),
+        title: this.get("title")||this.entity_name_plural,
+        route: this.getRoute(),
+        entity: {
+          name: {
+            singular: this.entity_name,
+            plural: this.entity_name_plural,
+          },
+          id: this.get("id")
+        }, //TODO: update me
+        version: app<any>("version"),
+        user: await this.request.auth().user(),
+      };
     }
   };
 

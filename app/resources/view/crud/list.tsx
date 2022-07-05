@@ -12,10 +12,10 @@ import {
   Title,
 } from "@mantine/core";
 import CrudLayout from "./base/layout";
-import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
 import ButtonDelete from "./buttons/delete";
 import { useEffect, useState } from "react";
 import Axios from "axios";
+import type { LayoutData } from "app/Library/CrudPanel/Traits/Views";
 
 export const onServer: OnServer = async (req, ctx: CrudContext) => {
   const columns = ctx.crud.columns();
@@ -51,7 +51,7 @@ export default ({
         <Anchor href="/admin">Dashboard</Anchor>
       </Breadcrumbs>
       <Title order={1} className="mb-3">
-        {layoutData.title}
+        {layoutData.title} <small className="text-sm">List</small>
       </Title>
       <Button
         className="mb-3"
@@ -99,6 +99,9 @@ export default ({
                         route={layoutData.route}
                         onDelete={deleteEntry}
                       ></ButtonDelete>
+                      <Button size="xs" compact className="ml-3" color="gray" component="a" href={`${layoutData.route}/${entry.id}/show`}>
+                        Show
+                      </Button>
                     </td>
                   </tr>
                 );

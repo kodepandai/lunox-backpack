@@ -7,9 +7,11 @@ import CrudController from "./CrudController";
 import CreateOperation from "./Operations/CreateOperation";
 import DeleteOperation from "./Operations/DeleteOperation";
 import ListOperation from "./Operations/ListOperation";
+import ShowOperation from "./Operations/ShowOperation";
 
 class UserCrudController extends Traitable(CrudController).use(
   ListOperation,
+  ShowOperation,
   CreateOperation,
   DeleteOperation
 ) {
@@ -18,7 +20,7 @@ class UserCrudController extends Traitable(CrudController).use(
     this.crud.setModel(User);
   }
 
-  public setupListOperation() {
+  private setupDefaultColumns() {
     this.crud.addColumn({
       name: "email",
     });
@@ -38,6 +40,20 @@ class UserCrudController extends Traitable(CrudController).use(
     });
   }
 
+  public setupListOperation() {
+    this.setupDefaultColumns();
+  }
+
+  public setupShowOperation() {
+    this.setupDefaultColumns();
+    this.crud.addColumn({
+      name: "phone",
+      label: "Phone Number"
+    });
+    this.crud.addColumn({
+      name: "active",
+    });
+  }
   public setupCreateOperation() {
     this.crud.setValidation(UserRequest);
     this.crud.addField({

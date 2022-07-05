@@ -1,12 +1,11 @@
 import type { CrudTrait } from "app/Model/Traits/CrudTrait";
-import { ObjectOf, Traitable } from "lunox";
+import { Traitable } from "lunox";
 import type { ExtendedModel } from "lunox/dist/Database/Eloquent/Model";
 import type { Request } from "lunox/dist/Http/Request";
 import Operations, { IOperations } from "./Traits/Operations";
 import Settings, { ISettings } from "./Traits/Settings";
 import Columns, { IColumns } from "./Traits/Columns";
 import Views, { IViews } from "./Traits/Views";
-import type { Authenticatable } from "lunox/dist/Contracts/Auth/Authenticatable";
 import Fields, { IFields } from "./Traits/Fields";
 import Validation, { IValidation } from "./Traits/Validation";
 import Create, { ICreate } from "./Traits/Create";
@@ -15,22 +14,6 @@ import SaveActions, { ISaveActions } from "./Traits/SaveActions";
 import Delete, { IDelete } from "./Traits/Delete";
 import Read, { IRead } from "./Traits/Read";
 
-export interface LayoutData {
-  appName: string;
-  title: string;
-  route?: string;
-  entity?: {
-    name: {
-      singular: string;
-      plural: string;
-    };
-  };
-  version: {
-    framework: string;
-    app: string;
-  };
-  user?: Authenticatable & ObjectOf<any>;
-}
 export class BaseCrudPanel {
   protected model!: typeof ExtendedModel & CrudTrait; // entity's model
   protected route!: string; // route for entity, used for links
@@ -95,24 +78,6 @@ export class BaseCrudPanel {
     );
   }
 
-  /**
-   * get data to be injected on crud layout view
-   */
-  public async getLayoutData(): Promise<LayoutData> {
-    return {
-      appName: config("app.name"),
-      title: this.entity_name_plural,
-      route: this.getRoute(),
-      entity: {
-        name: {
-          singular: this.entity_name,
-          plural: this.entity_name_plural,
-        },
-      }, //TODO: update me
-      version: app<any>("version"),
-      user: await this.request.auth().user(),
-    };
-  }
 }
 interface CrudPanel
   extends ISettings,
