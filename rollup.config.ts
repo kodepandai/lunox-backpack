@@ -3,9 +3,11 @@ import { terser } from "rollup-plugin-terser";
 import del from "rollup-plugin-delete";
 import ts from "@rollup/plugin-typescript";
 import json from "@rollup/plugin-json";
+import { serve } from "lunox/build";
 
 const production = process.env.NODE_ENV == "production";
 const viteEntry = production ? [] : ["entry-server.ts"];
+
 export default [
   {
     input: [
@@ -29,6 +31,9 @@ export default [
       ts(),
       multi(),
       production && terser(),
+
+      //this will serve application after build completed.
+      !production && serve(),
     ],
     external: [
       "bcryptjs",

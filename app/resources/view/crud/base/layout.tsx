@@ -21,9 +21,9 @@ import {
 } from "@mantine/notifications";
 import { ModalsProvider } from "@mantine/modals";
 import Sidebar from "./sidebar";
-import type { LayoutData } from "app/Library/CrudPanel/CrudPanel";
 import Loader from "./loader";
 import { session } from "lunox/client";
+import type { LayoutData } from "app/Library/CrudPanel/Traits/Views";
 
 const CrudLayout: FC<PropsWithChildren<{ data: LayoutData }>> = ({
   children,

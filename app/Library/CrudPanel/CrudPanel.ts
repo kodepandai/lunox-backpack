@@ -77,7 +77,6 @@ export class BaseCrudPanel {
       ""
     );
   }
-
 }
 interface CrudPanel
   extends ISettings,

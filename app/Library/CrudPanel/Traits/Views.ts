@@ -29,10 +29,10 @@ export interface IViews {
 
   setShowView(view: string): void;
   getShowView(): string;
-   /**
+  /**
    * get data to be injected on crud layout view
    */
-  getLayoutData(): Promise<LayoutData> 
+  getLayoutData(): Promise<LayoutData>;
 }
 const Views: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
   class extends s {
@@ -63,14 +63,14 @@ const Views: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
     public async getLayoutData(): Promise<LayoutData> {
       return {
         appName: config("app.name"),
-        title: this.get("title")||this.entity_name_plural,
+        title: this.get("title") || this.entity_name_plural,
         route: this.getRoute(),
         entity: {
           name: {
             singular: this.entity_name,
             plural: this.entity_name_plural,
           },
-          id: this.get("id")
+          id: this.get("id"),
         }, //TODO: update me
         version: app<any>("version"),
         user: await this.request.auth().user(),

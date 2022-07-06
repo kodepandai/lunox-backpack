@@ -52,8 +52,8 @@ const ShowOperation: Trait<typeof CrudController> = (s) =>
     /**
      * get entry detail for show operation.
      */
-    public  detail(req: Request, id: number) {
-      return  this.crud.getEntry(id);
+    public detail(req: Request, id: number) {
+      return this.crud.getEntry(id);
     }
   };
 

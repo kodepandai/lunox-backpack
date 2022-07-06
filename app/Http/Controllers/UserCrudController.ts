@@ -46,12 +46,15 @@ class UserCrudController extends Traitable(CrudController).use(
 
   public setupShowOperation() {
     this.setupDefaultColumns();
+
     this.crud.addColumn({
       name: "phone",
-      label: "Phone Number"
+      label: "Phone Number",
     });
     this.crud.addColumn({
       name: "active",
+      label: "Status",
+      format: (val: string) => (val ? "active" : "inactive"),
     });
   }
   public setupCreateOperation() {

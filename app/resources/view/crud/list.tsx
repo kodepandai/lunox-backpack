@@ -99,7 +99,14 @@ export default ({
                         route={layoutData.route}
                         onDelete={deleteEntry}
                       ></ButtonDelete>
-                      <Button size="xs" compact className="ml-3" color="gray" component="a" href={`${layoutData.route}/${entry.id}/show`}>
+                      <Button
+                        size="xs"
+                        compact
+                        className="ml-3"
+                        color="gray"
+                        component="a"
+                        href={`${layoutData.route}/${entry.id}/show`}
+                      >
                         Show
                       </Button>
                     </td>

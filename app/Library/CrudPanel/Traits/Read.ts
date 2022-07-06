@@ -55,6 +55,11 @@ const Read: Trait<typeof BaseCrudPanel & Class<ISettings> & Class<IColumns>> = (
           // TODO: handle relationship data here
           // for example column.name with dot notation
         }
+
+        // if column format is function, format the entry value
+        if (typeof column.format == "function") {
+          loadedData[column.name] = column.format(loadedData[column.name]);
+        }
       });
       return loadedData;
     }

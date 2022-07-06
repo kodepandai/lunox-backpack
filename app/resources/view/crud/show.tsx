@@ -31,12 +31,13 @@ export default ({
   columns: Column[];
   layoutData: LayoutData;
 }) => {
-
   const [entry, setEntry] = useState<any>({});
   useEffect(() => {
-    Axios.get(`${layoutData.route}/${layoutData.entity?.id}/detail`).then((res) => {
-      setEntry(res.data);
-    });
+    Axios.get(`${layoutData.route}/${layoutData.entity?.id}/detail`).then(
+      (res) => {
+        setEntry(res.data);
+      }
+    );
   }, []);
 
   return (
@@ -54,25 +55,24 @@ export default ({
         <ScrollArea>
           <Table>
             <tbody>
-              {
-                columns.map((column, ci) => {
-                  const ColumnComponent = (components as any)[
-                        column.type as any
-                  ].default;
+              {columns.map((column, ci) => {
+                const ColumnComponent = (components as any)[column.type as any]
+                  .default;
 
-                  return(
-                    <tr key={ci}>
-                      <td className="font-bold">{column.label}</td>
-                      <td><ColumnComponent 
+                return (
+                  <tr key={ci}>
+                    <td className="font-bold">{column.label}</td>
+                    <td>
+                      <ColumnComponent
                         value={entry[column.name]?.toString()}
-                        column={column}/></td>
-                    </tr>
-                  );
-                })
-              }
-            </tbody>  
+                        column={column}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </Table>
-          
         </ScrollArea>
       </Paper>
     </CrudLayout>
