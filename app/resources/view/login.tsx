@@ -42,7 +42,7 @@ const Login = ({ version = {} }: { version: any }) => {
                 <input type="hidden" name="_token" value={csrf_token()} />
                 <TextInput
                   type="text"
-                  name="username"
+                  name="user_name"
                   label="username"
                   placeholder="username or email"
                   defaultValue={old("username")}

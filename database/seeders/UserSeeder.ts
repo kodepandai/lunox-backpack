@@ -4,7 +4,7 @@ class UserSeeder extends Seeder {
   public async run() {
     await User.query().del();
     await User.query().insert({
-      username: "user",
+      user_name: "user",
       email: "user@example.mail",
       first_name: "John",
       last_name: "Doe",

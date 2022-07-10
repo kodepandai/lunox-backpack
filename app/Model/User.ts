@@ -7,7 +7,7 @@ interface User extends Auth {}
 class User extends Traitable(Model).use(Authenticatable, CrudTrait) {
   // this will make typescript happy
   static factory: () => any;
-  username!: string;
+  user_name!: string;
   email!: string;
   password!: string;
   first_name!: string;
@@ -16,7 +16,7 @@ class User extends Traitable(Model).use(Authenticatable, CrudTrait) {
   active!: boolean;
 
   public static fillable = [
-    "username",
+    "user_name",
     "email",
     "password",
     "first_name",
@@ -42,5 +42,6 @@ class User extends Traitable(Model).use(Authenticatable, CrudTrait) {
   public getFullNameAttribute() {
     return this.first_name + " " + this.last_name;
   }
+  
 }
 export default User;
