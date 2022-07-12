@@ -27,6 +27,9 @@ export interface IViews {
   setCreateView(view: string): void;
   getCreateView(): string;
 
+  setUpdateView(view: string): void;
+  getUpdateView(): string;
+
   setShowView(view: string): void;
   getShowView(): string;
   /**
@@ -58,6 +61,14 @@ const Views: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
 
     public setShowView() {
       this.set("show.view", view);
+    }
+
+    public setUpdateView(view: string) {
+      return this.set("update.view", view);
+    }
+
+    public getUpdateView() {
+      return this.get("update.view") || "crud.edit";
     }
 
     public async getLayoutData(): Promise<LayoutData> {

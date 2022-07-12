@@ -14,6 +14,7 @@ export interface Field {
   attributes?: {
     required?: boolean;
   };
+  value?: any;
   [key: string]: any;
 }
 export interface IFields {

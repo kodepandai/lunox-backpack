@@ -8,11 +8,13 @@ import CreateOperation from "./Operations/CreateOperation";
 import DeleteOperation from "./Operations/DeleteOperation";
 import ListOperation from "./Operations/ListOperation";
 import ShowOperation from "./Operations/ShowOperation";
+import UpdateOperation from "./Operations/UpdateOperation";
 
 class UserCrudController extends Traitable(CrudController).use(
   ListOperation,
   ShowOperation,
   CreateOperation,
+  UpdateOperation,
   DeleteOperation
 ) {
   public setup(): void {
@@ -25,12 +27,11 @@ class UserCrudController extends Traitable(CrudController).use(
       name: "email",
     });
     this.crud.addColumn({
-      name: "username",
+      name: "user_name",
       label: "User Name",
     });
     this.crud.addColumn({
       name: "full_name",
-      label: "Full Name",
     });
     this.crud.addColumn({
       name: "created_at",
@@ -51,13 +52,23 @@ class UserCrudController extends Traitable(CrudController).use(
       name: "phone",
       label: "Phone Number",
     });
+
     this.crud.addColumn({
       name: "active",
       label: "Status",
       format: (val: string) => (val ? "active" : "inactive"),
     });
   }
+
   public setupCreateOperation() {
+    this.setupDefaultFields();
+  }
+
+  public setupUpdateOperation() {
+    this.setupDefaultFields();
+  }
+
+  public setupDefaultFields() {
     this.crud.setValidation(UserRequest);
     this.crud.addField({
       name: "email",
@@ -65,7 +76,7 @@ class UserCrudController extends Traitable(CrudController).use(
     });
 
     this.crud.addField({
-      name: "username",
+      name: "user_name",
       label: "User Name",
       grid: 6,
     });

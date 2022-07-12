@@ -42,6 +42,5 @@ class User extends Traitable(Model).use(Authenticatable, CrudTrait) {
   public getFullNameAttribute() {
     return this.first_name + " " + this.last_name;
   }
-  
 }
 export default User;

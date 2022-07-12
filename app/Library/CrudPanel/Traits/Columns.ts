@@ -38,7 +38,7 @@ const Columns: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
 
     protected makeSureColumnHasNeededAttributes(column: Column) {
       if (!column.label) {
-        column.label = Str.ucfirst(column.name);
+        column.label = Str.ucfirst(column.name).replace(/_/g, " ");
       }
       if (!column.type) {
         column.type = "text";

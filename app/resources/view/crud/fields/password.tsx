@@ -7,7 +7,6 @@ const Text: FC<PropsWithChildren<any>> = ({
   placeholder,
   error,
   attributes,
-  defaultValue,
 }) => {
   return (
     <PasswordInput
@@ -16,8 +15,7 @@ const Text: FC<PropsWithChildren<any>> = ({
       label={label}
       placeholder={placeholder}
       error={error}
-      autoComplete="off"
-      defaultValue={defaultValue}
+      autoComplete="new-password"
       {...attributes}
     />
   );

@@ -13,6 +13,7 @@ import Access, { IAccess } from "./Traits/Access";
 import SaveActions, { ISaveActions } from "./Traits/SaveActions";
 import Delete, { IDelete } from "./Traits/Delete";
 import Read, { IRead } from "./Traits/Read";
+import Update, { IUpdate } from "./Traits/Update";
 
 export class BaseCrudPanel {
   protected model!: typeof ExtendedModel & CrudTrait; // entity's model
@@ -87,6 +88,7 @@ interface CrudPanel
     IFields,
     IValidation,
     ICreate,
+    IUpdate,
     IAccess,
     IRead,
     ISaveActions {}
@@ -94,6 +96,7 @@ class CrudPanel extends Traitable(BaseCrudPanel).use(
   Access,
   Columns,
   Create,
+  Update,
   Delete,
   Fields,
   Views,

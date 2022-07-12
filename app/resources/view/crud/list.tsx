@@ -93,22 +93,32 @@ export default ({
                       );
                     })}
                     <td>
-                      <ButtonDelete
-                        entityName={layoutData.entity?.name.singular}
-                        id={entry.id}
-                        route={layoutData.route}
-                        onDelete={deleteEntry}
-                      ></ButtonDelete>
                       <Button
                         size="xs"
                         compact
-                        className="ml-3"
+                        className="mr-3"
                         color="gray"
                         component="a"
                         href={`${layoutData.route}/${entry.id}/show`}
                       >
                         Show
                       </Button>
+                      <Button
+                        size="xs"
+                        compact
+                        className="mr-3"
+                        color="gray"
+                        component="a"
+                        href={`${layoutData.route}/${entry.id}/edit`}
+                      >
+                        Edit
+                      </Button>
+                      <ButtonDelete
+                        entityName={layoutData.entity?.name.singular}
+                        id={entry.id}
+                        route={layoutData.route}
+                        onDelete={deleteEntry}
+                      ></ButtonDelete>
                     </td>
                   </tr>
                 );
