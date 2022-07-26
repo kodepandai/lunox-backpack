@@ -1,3 +1,4 @@
+import CrudRequest from "../../CrudRequest";
 import type { Class, FormRequest, Trait } from "lunox";
 import type { Request } from "lunox/dist/Http/Request";
 import type { BaseCrudPanel } from "../CrudPanel";
@@ -23,6 +24,9 @@ const Validation: Trait<typeof BaseCrudPanel & Class<ISettings>> = (s) =>
   class extends s {
     public setValidation(formRequestClass: typeof FormRequest) {
       const formRequestInstance = this.request.setFormRequest(formRequestClass);
+      if(formRequestInstance instanceof CrudRequest){
+        formRequestInstance.setCrud(this as any);
+      }
       this.setRequiredFields(formRequestInstance);
     }
 

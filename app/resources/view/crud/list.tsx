@@ -37,7 +37,6 @@ export default ({
 
   useEffect(() => {
     Axios.get(`${layoutData.route}/search`).then((res) => {
-      console.log(res);
       setEntries(res.data);
     });
   }, []);
