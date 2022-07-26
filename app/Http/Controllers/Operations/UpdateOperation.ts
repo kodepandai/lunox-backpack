@@ -17,7 +17,7 @@ const UpdateOperation: Trait<typeof CrudController> = (s) =>
         segment,
       });
 
-      Route.put(segment + "/id", [controller, "update"], {
+      Route.put(segment + "/:id", [controller, "update"], {
         operation: "update",
         segment,
       });
@@ -39,6 +39,8 @@ const UpdateOperation: Trait<typeof CrudController> = (s) =>
     public async edit(req: Request, id: number) {
       this.crud.hasAccessOrFail("update");
 
+      this.crud.set("id", Number(id));
+
       this.crud.setOperationSetting(
         "fields",
         await this.crud.getUpdateFields(id)
@@ -58,7 +60,13 @@ const UpdateOperation: Trait<typeof CrudController> = (s) =>
       await this.crud.validateRequest();
 
       // insert items to db
-      // await this.crud
+      await this.crud.update(id, this.crud.getStrippedSaveRequest());
+
+      this.crud.getRequest().session().flash("message", `${this.crud.entity_name} updated`);
+
+      this.crud.setSaveAction();
+
+      return this.crud.performSaveAction();
     }
   };
 

@@ -61,12 +61,13 @@ export default ({
       </Title>
       <Paper shadow="xs" p="xs">
         <form
-          action={layoutData.route}
+          action={`${layoutData.route}/${layoutData.entity?.id}?_method=PUT`}
           method="POST"
           onSubmit={doSubmit}
           ref={formRef}
           autoComplete="off"
         >
+          <input type="hidden" name="_method" value="PUT" />
           <input type="hidden" name="_token" value={csrf_token()} />
           <input type="hidden" name="_save_action" value={buttonAction?.name} />
           <Grid>
