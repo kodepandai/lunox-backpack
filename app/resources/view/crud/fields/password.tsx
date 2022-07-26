@@ -17,6 +17,7 @@ const Text: FC<PropsWithChildren<any>> = ({
       error={error}
       autoComplete="new-password"
       {...attributes}
+      defaultValue=""
     />
   );
 };
