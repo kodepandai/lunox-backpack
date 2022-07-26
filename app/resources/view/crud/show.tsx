@@ -5,6 +5,7 @@ import * as components from "./columns/index";
 import {
   Anchor,
   Breadcrumbs,
+  Button,
   Paper,
   ScrollArea,
   Table,
@@ -74,6 +75,18 @@ export default ({
             </tbody>
           </Table>
         </ScrollArea>
+      </Paper>
+      <Paper shadow="xs" p="xs" className="text-center" mt="sm"
+      >
+        <Button
+          compact
+          className="mr-3"
+          color="gray"
+          component="a"
+          href={`${layoutData.route}/${entry.id}/edit`}
+        >
+          Edit
+        </Button>
       </Paper>
     </CrudLayout>
   );
