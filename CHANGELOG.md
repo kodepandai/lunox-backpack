@@ -2,156 +2,58 @@
 ## [Unreleased]
 
 
-<a name="v1.3.0-react"></a>
-## [v1.3.0-react] - 2022-06-04
-### Features
-- **auth:** added authentication example for preset react ([#28](https://github.com/kodepintar/lunox/issues/28))
-
-
-<a name="v1.2.0-react"></a>
-## [v1.2.0-react] - 2022-05-20
-### Features
-- **view:** example usage of react as template engine
-
-
-<a name="v1.1.1"></a>
-## [v1.1.1] - 2022-05-17
-### Bug Fixes
-- **exception:** exception handler return json when request wants json
-
-### Code Refactoring
-- **view:** simplify entry-client and entry-server
-
-
-<a name="v1.1.0"></a>
-## [v1.1.0] - 2022-05-14
-### Bug Fixes
-- **vite:** change vite config using js extension to avoid error during development
-
-### Features
-- **exception:** custom error page
-
-
-<a name="v1.0.0"></a>
-## [v1.0.0] - 2022-05-10
-### Features
-- **test:** added basic test example
-
-
-<a name="v1.0.0-beta"></a>
-## [v1.0.0-beta] - 2022-04-12
-### Code Refactoring
-- **controller:** change controller to class based controller
-
-### Features
-- **provider:** added AppServiceProvider template
-
-
-<a name="v0.9.0"></a>
-## [v0.9.0] - 2022-03-19
-### Code Refactoring
-- pure esm mode
-
-### Features
-- **exception:** added dontReport property to ExceptionHandler
-- **middleware:** added EncryptCookie and VerifyCsrfToken middleware
-
-
-<a name="v0.8.0"></a>
-## [v0.8.0] - 2022-01-11
-### Features
-- **auth:** example auth with session guard
-- **exception:** added validation exception handler when request is not wants json
-- **view:** added unocss integration on home page and remove auth example
-
-
-<a name="v0.7.1"></a>
-## [v0.7.1] - 2022-01-03
-### Performance Improvements
-- **session:** bump lunox to v0.6.1 to optimize session handler in view
-
-
-<a name="v0.7.0"></a>
-## [v0.7.0] - 2021-12-21
-### Bug Fixes
-- **exception:** missing status for validation exception handler
-
-### Features
-- **session:** added session handler example
-- **view:** added view service provider
-
-
-<a name="v0.6.0"></a>
-## [v0.6.0] - 2021-12-10
-### Features
-- **database:** add user seeder example
-
-
-<a name="v0.5.0"></a>
-## [v0.5.0] - 2021-12-10
-### Features
-- **console:** implement console kernel and artisan command
-- **database:** add User Model extends lunox Model
-- **database:** add database migration example
-
-
-<a name="v0.4.0"></a>
-## [v0.4.0] - 2021-12-06
-### Features
-- **framework:** laranode is renamed to lunox and install it as node module ([#9](https://github.com/kodepintar/lunox/issues/9))
-
-
-<a name="v0.3.0"></a>
-## [v0.3.0] - 2021-11-30
-### Features
-- **filesystem:** filesystem manager using [@slynova](https://github.com/slynova)/flydrive ([#8](https://github.com/kodepintar/lunox/issues/8))
-
-
-<a name="v0.2.0"></a>
-## [v0.2.0] - 2021-11-29
-### Bug Fixes
-- **view:** svelte component failed hydrate on nested view fix [#5](https://github.com/kodepintar/lunox/issues/5)
-
-### Features
-- **exception:** custom exception and error handler ([#6](https://github.com/kodepintar/lunox/issues/6))
-- **request:** handle uploaded file and move to local storage ([#7](https://github.com/kodepintar/lunox/issues/7))
-- **view:** support svelte as view ([#4](https://github.com/kodepintar/lunox/issues/4))
-
-
 <a name="v0.1.0"></a>
-## v0.1.0 - 2021-11-19
+## [v0.1.0] - 2022-07-27
 ### Bug Fixes
-- **facade:** facade now using one unique singleton
-- **routing:** pop middleware stack after called method addRequest
-- **routing:** flatten middleware stack
+- **crud:** delete operation not remove entries
+- **field:** hide password from default value
+- **style:** prevent mantine ui style flashed during load
+
+### Code Refactoring
+- **crud:** load list entries from ajax search route
+- **crud:** set default operation and route segment from route context instead of middleware
+- **login:** change login form to mantine ui
 
 ### Features
-- add Facade and RouteServiceProvider
-- bootstrap all Bootstrapper from Kernel
-- create basic Kernel to start polka server
-- create container and application bootstrapper
-- **kernel:** implement global middleware ([#1](https://github.com/kodepintar/lunox/issues/1))
-- **request:** merge request between middleware
-- **request:** new Illuminate\Http\Request class that can be used inside route action
-- **response:** added response factory ([#3](https://github.com/kodepintar/lunox/issues/3))
-- **routing:** handle route middleware on Kernel
-- **routing:** route prefixing and grouping
-- **validation:** create validator facade from node-input-validator ([#2](https://github.com/kodepintar/lunox/issues/2))
+- initialize CrudController, CrudPanel and BackpackServiceProvider
+- **column:** support format function
+- **column:** added text component
+- **config:** added crud config
+- **controller:** add UserCrudController
+- **create:** add flash message on success create entry
+- **crud:** initialize create operation
+- **crud:** added base CrudController
+- **crud:** added CrudPanel
+- **crud:** added BackpackServiceProvider
+- **crud:** added DeleteOperation
+- **crud:** added hasAccessOrFail method
+- **crud:** save action on create operation
+- **crud:** added list view
+- **crud:** setup default access and validation
+- **crud:** list operation for module user
+- **crud:** added SaveActions trait
+- **crud:** initialize UpdateOperation
+- **crud:** added Access trait
+- **crud:** added Fields trait
+- **crud:** added Validation trait
+- **crud:** added ShowOperation
+- **crud:** added Create trait
+- **field:** set required attributes from operation setting
+- **field:** added text and password field
+- **operation:** added ListOperation trait
+- **request:** crud request now can access crud panel instance
+- **route:** add route crud for user
+- **show:** added edit button to show view
+- **trait:** added Columns, Operations, Settings, and Views crudpanel trait
+- **update:** implement saving data to database on update operation
+- **user:** hash password with setPasswordAttribute method
+- **user:** append custom attribute
+- **user:** added UserRequest
+- **view:** handling modal and notification
 
 
-[Unreleased]: https://github.com/kodepintar/lunox/compare/v1.3.0-react...HEAD
-[v1.3.0-react]: https://github.com/kodepintar/lunox/compare/v1.2.0-react...v1.3.0-react
-[v1.2.0-react]: https://github.com/kodepintar/lunox/compare/v1.1.1...v1.2.0-react
-[v1.1.1]: https://github.com/kodepintar/lunox/compare/v1.1.0...v1.1.1
-[v1.1.0]: https://github.com/kodepintar/lunox/compare/v1.0.0...v1.1.0
-[v1.0.0]: https://github.com/kodepintar/lunox/compare/v1.0.0-beta...v1.0.0
-[v1.0.0-beta]: https://github.com/kodepintar/lunox/compare/v0.9.0...v1.0.0-beta
-[v0.9.0]: https://github.com/kodepintar/lunox/compare/v0.8.0...v0.9.0
-[v0.8.0]: https://github.com/kodepintar/lunox/compare/v0.7.1...v0.8.0
-[v0.7.1]: https://github.com/kodepintar/lunox/compare/v0.7.0...v0.7.1
-[v0.7.0]: https://github.com/kodepintar/lunox/compare/v0.6.0...v0.7.0
-[v0.6.0]: https://github.com/kodepintar/lunox/compare/v0.5.0...v0.6.0
-[v0.5.0]: https://github.com/kodepintar/lunox/compare/v0.4.0...v0.5.0
-[v0.4.0]: https://github.com/kodepintar/lunox/compare/v0.3.0...v0.4.0
-[v0.3.0]: https://github.com/kodepintar/lunox/compare/v0.2.0...v0.3.0
-[v0.2.0]: https://github.com/kodepintar/lunox/compare/v0.1.0...v0.2.0
+<a name="v0.0.1"></a>
+## v0.0.1 - 2022-06-05
+
+[Unreleased]: https://github.com/kodepintar/lunox-framework/compare/v0.1.0...HEAD
+[v0.1.0]: https://github.com/kodepintar/lunox-framework/compare/v0.0.1...v0.1.0
