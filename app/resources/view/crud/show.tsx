@@ -76,8 +76,7 @@ export default ({
           </Table>
         </ScrollArea>
       </Paper>
-      <Paper shadow="xs" p="xs" className="text-center" mt="sm"
-      >
+      <Paper shadow="xs" p="xs" className="text-center" mt="sm">
         <Button
           compact
           className="mr-3"

@@ -4,7 +4,7 @@ import type CrudPanel from "./CrudPanel/CrudPanel";
 class CrudRequest extends FormRequest {
   public crud!: CrudPanel;
 
-  public setCrud(crud: CrudPanel){
+  public setCrud(crud: CrudPanel) {
     this.crud = crud;
   }
 }

@@ -62,7 +62,10 @@ const UpdateOperation: Trait<typeof CrudController> = (s) =>
       // insert items to db
       await this.crud.update(id, this.crud.getStrippedSaveRequest());
 
-      this.crud.getRequest().session().flash("message", `${this.crud.entity_name} updated`);
+      this.crud
+        .getRequest()
+        .session()
+        .flash("message", `${this.crud.entity_name} updated`);
 
       this.crud.setSaveAction();
 

@@ -16,8 +16,10 @@ class UserRequest extends CrudRequest {
     };
   }
 
-  private passwordRequiredOrNullable(){
-    return this.crud.getCurrentOperation() == "create"? "required": "nullable";
+  private passwordRequiredOrNullable() {
+    return this.crud.getCurrentOperation() == "create"
+      ? "required"
+      : "nullable";
   }
 }
 

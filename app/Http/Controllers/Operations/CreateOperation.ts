@@ -53,6 +53,11 @@ const CreateOperation: Trait<typeof CrudController> = (s) =>
       // insert items to db
       await this.crud.create(this.crud.getStrippedSaveRequest());
 
+      this.crud
+        .getRequest()
+        .session()
+        .flash("message", `New ${this.crud.entity_name} created`);
+
       this.crud.setSaveAction();
 
       return this.crud.performSaveAction();
